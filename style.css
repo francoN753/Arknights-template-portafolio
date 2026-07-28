@@ -331,6 +331,7 @@ html, body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 1.5rem 0;
 }
 
 .marquee-bg {
