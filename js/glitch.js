@@ -1,10 +1,30 @@
-// js/glitch.js — Efecto Glitch Táctico Perpetuo
+// js/glitch.js — Efecto Glitch Táctico Perpetuo + Animación de Entrada
 
 document.addEventListener('DOMContentLoaded', () => {
     const title = document.getElementById('glitch-title');
     if (!title) return; // Seguridad: si el título no existe, no hace nada.
 
     const chars = title.querySelectorAll('.char');
+
+    // ═══════════════════════════════════════
+    // ANIMACIÓN DE ENTRADA: Amarillo → Blanco (izq a der)
+    // ═══════════════════════════════════════
+    chars.forEach(char => char.classList.add('char-intro'));
+
+    const INTRO_DELAY = 150;   // ms antes de empezar la transición
+    const STAGGER = 80;        // ms entre cada letra
+
+    setTimeout(() => {
+        chars.forEach((char, i) => {
+            setTimeout(() => {
+                char.classList.remove('char-intro');
+            }, i * STAGGER);
+        });
+    }, INTRO_DELAY);
+
+    // ═══════════════════════════════════════
+    // EFECTO GLITCH EN HOVER
+    // ═══════════════════════════════════════
 
     // Caracteres para el efecto (Hexadecimal, Binario y Táctico)
     const glitchChars = '0123456789ABCDEF!$[]//X#';
