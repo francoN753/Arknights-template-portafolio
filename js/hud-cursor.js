@@ -1,3 +1,4 @@
+// js/hud-cursor.js
 document.addEventListener('DOMContentLoaded', () => {
     const hudCursor = document.getElementById('hud-cursor');
     const coordsDisplay = hudCursor.querySelector('.coords');

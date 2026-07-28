@@ -1,4 +1,4 @@
-
+//js/contact.js
 const contactTrigger = document.getElementById('contact-trigger');
 const contactModal = document.getElementById('contact-modal');
 const contactOverlay = document.getElementById('contact-modal-overlay');

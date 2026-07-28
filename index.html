@@ -7,22 +7,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300..700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <title>F. Nuzzo - Portafolio</title>
 </head>
 
-<body>
+<body class="no-scroll">
+
+    <div id="intro-overlay" class="intro-overlay">
+        <video id="intro-video" autoplay muted playsinline preload="auto">
+            <source src="assets/Intro.mp4" type="video/mp4">
+            Tu navegador no soporta reproducción de video HTML5.
+        </video>
+        
+        <button id="skip-intro" class="skip-intro-btn">
+            <span class="btn-corner"></span>
+            [ OMITIR INTRO // ESC ]
+        </button>
+    </div>
 
     <div id="hud-cursor" class="hud-cursor">
         <div class="reticle"></div>
@@ -72,8 +76,7 @@
                         <path d="M 30,60 L 30,30 L 60,30" />
                         <path d="M 30, calc(100% - 60) L 30, calc(100% - 30) L 60, calc(100% - 30)" />
                         <path d="M calc(100% - 60),30 L calc(100% - 30),30 L calc(100% - 30),60" />
-                        <path
-                            d="M calc(100% - 60), calc(100% - 30) L calc(100% - 30), calc(100% - 30) L calc(100% - 30), calc(100% - 60)" />
+                        <path d="M calc(100% - 60), calc(100% - 30) L calc(100% - 30), calc(100% - 30) L calc(100% - 30), calc(100% - 60)" />
                     </g>
                 </svg>
 
@@ -92,7 +95,7 @@
                 </div>
 
                 <div class="hud-callout callout-bottom-left">
-                    <span class="yellow-tag">ENDFIELD_CORE</span>
+                    <span class="yellow-tag">NUZZO_CORE</span>
                     <span class="dim-text">SYSTEM_READY // 0x4F8</span>
                 </div>
 
@@ -107,10 +110,8 @@
                 <div class="hero-title-wrapper">
                     <div class="marquee-bg" aria-hidden="true">
                         <div class="marquee-track">
-                            <span>FULLSTACK DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull; FRONTEND
-                                DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull;&nbsp;</span>
-                            <span>FULLSTACK DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull; FRONTEND
-                                DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull;&nbsp;</span>
+                            <span>FULLSTACK DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull; FULLSTACK DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull;&nbsp;</span>
+                            <span>FULLSTACK DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull; FULLSTACK DEVELOPER &bull; SOFTWARE ENGINEER &bull; CREATIVE CODER &bull;&nbsp;</span>
                         </div>
                     </div>
                     <h1 class="hero-title" id="glitch-title">
@@ -176,8 +177,7 @@
                     <div class="contact-grid">
                         <div class="contact-item">
                             <span class="item-label">EMAIL</span>
-                            <a href="mailto:franconuzzon2007@gmail.com"
-                                class="item-value">franconuzzon2007@gmail.com</a>
+                            <a href="mailto:franconuzzon2007@gmail.com" class="item-value">franconuzzon2007@gmail.com</a>
                         </div>
                         <div class="contact-item">
                             <span class="item-label">UBICACIÓN</span>
@@ -208,7 +208,7 @@
     </main>
 
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-    <script src="js/spotlight.js"></script>
+    <script src="js/intro.js"></script> <script src="js/spotlight.js"></script>
     <script src="js/tilt.js"></script>
     <script src="js/glitch.js"></script>
     <script src="js/hud-cursor.js"></script>
