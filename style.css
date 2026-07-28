@@ -127,10 +127,11 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   text-align: center;
   pointer-events: none;
+  gap: 2rem;
 }
 
 .hero-tagline {
@@ -320,6 +321,52 @@ html, body {
   letter-spacing: 2px;
   opacity: 0.75;
   margin-top: auto;
+}
+
+/* Wrapper del título con marquee */
+.hero-title-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.marquee-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.07;
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.marquee-track span {
+  font-family: var(--font-heading);
+  font-size: 4vw;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 
