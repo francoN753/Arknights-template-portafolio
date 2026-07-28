@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel+Decorative:wght@700;900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <title>F. Nuzzo - Portafolio</title>
+</head>
+
+<body>
+
+    <div id="hud-cursor" class="hud-cursor">
+        <div class="reticle"></div>
+        <div class="coords">X:000 Y:000</div>
+    </div>
+
+    <header class="navbar">
+        <nav class="nav-group nav-left">
+            <a href="#proyectos">Proyectos</a>
+            <a href="#sobre-mi">Sobre mí</a>
+        </nav>
+
+        <a href="#" class="nav-logo">FORMULA_FN</a>
+
+        <nav class="nav-group nav-right">
+            <a href="https://github.com/francoN753" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://instagram.com/franko_uno" target="_blank" rel="noopener">Instagram</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section" id="hero">
+            <div class="tactical-bg">
+                <div class="bg-dots-grid"></div>
+
+                <svg class="hud-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                    <defs>
+                        <pattern id="dot-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                            <circle cx="2" cy="2" r="1" fill="rgba(255, 255, 255, 0.15)" />
+                        </pattern>
+                    </defs>
+
+                    <g class="hud-vectors" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" fill="none">
+                        <line x1="50%" y1="10%" x2="50%" y2="90%" stroke-dasharray="4 8" />
+                        <line x1="5%" y1="50%" x2="95%" y2="50%" stroke-dasharray="4 8" />
+                        <circle cx="50%" cy="50%" r="220" stroke-dasharray="2 12" />
+                        <circle cx="50%" cy="50%" r="380" stroke-dasharray="1 20" />
+                        
+                        <path d="M 20% 25% L 20% 27% M 19% 26% L 21% 26%" stroke-width="2" />
+                        <path d="M 80% 25% L 80% 27% M 79% 26% L 81% 26%" stroke-width="2" />
+                        <path d="M 20% 75% L 20% 77% M 19% 76% L 21% 76%" stroke-width="2" />
+                        <path d="M 80% 75% L 80% 77% M 79% 76% L 81% 76%" stroke-width="2" />
+                    </g>
+
+                    <g class="hud-corners" stroke="rgba(248, 245, 70, 0.3)" stroke-width="1.5" fill="none">
+                        <path d="M 30,60 L 30,30 L 60,30" />
+                        <path d="M 30, calc(100% - 60) L 30, calc(100% - 30) L 60, calc(100% - 30)" />
+                        <path d="M calc(100% - 60),30 L calc(100% - 30),30 L calc(100% - 30),60" />
+                        <path d="M calc(100% - 60), calc(100% - 30) L calc(100% - 30), calc(100% - 30) L calc(100% - 30), calc(100% - 60)" />
+                    </g>
+                </svg>
+
+                <div class="geo-shape geo-bar-top-right"></div>
+                <div class="geo-shape geo-box-mid-left"></div>
+
+                <div class="hud-callout callout-top-center">
+                    <span>[ REF_GRID // 0x99A ]</span>
+                    <div class="callout-bar"></div>
+                </div>
+
+                <div class="hud-callout callout-mid-right">
+                    <span>UNIT_STATUS // ACTIVE</span>
+                    <span>SYS_VER // 2.6.0</span>
+                    <span>SYS.LOC // 10.4806° N</span>
+                </div>
+
+                <div class="hud-callout callout-bottom-left">
+                    <span class="yellow-tag">ENDFIELD_CORE</span>
+                    <span class="dim-text">SYSTEM_READY // 0x4F8</span>
+                </div>
+
+                <div class="hud-callout callout-bottom-center">
+                    <span>▲ CAUTION // HIGH DENSITY HUD DATA ▲</span>
+                </div>
+            </div>
+
+            <div class="hero-content">
+                <p class="hero-tagline">Ingeniería & Desarrollo Software</p>
+                
+                <h1 class="hero-title" id="glitch-title">
+                    <span class="char" data-char="N">N</span>
+                    <span class="char" data-char="U">U</span>
+                    <span class="char" data-char="Z">Z</span>
+                    <span class="char" data-char="Z">Z</span>
+                    <span class="char" data-char="O">O</span>
+                </h1>
+                
+                <div class="hero-footer-info">
+                    <span>Desplázate para explorar</span>
+                </div>
+            </div>
+        </section>
+
+        <aside class="tactical-sidebar left-sidebar">
+            <div class="power-bar-container">
+                <span class="sidebar-label">PWR_SYS</span>
+                <div class="power-bar">
+                    <div class="power-fill"></div>
+                </div>
+                <span class="power-percentage">98%</span>
+            </div>
+
+            <div class="tactical-divider"></div>
+
+            <div class="vertical-text-group">
+                <span class="vertical-text">SYS.LOC // CARACAS_HUB</span>
+                <span class="vertical-text dim">// FORMULA_FN_ENGINE_v2.6</span>
+            </div>
+
+            <div class="status-dots-grid">
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+        </aside>
+
+        <button id="contact-trigger" class="availability-badge-bottom" aria-label="Abrir contacto">
+            <span class="badge-corner"></span>
+            <span class="badge-text">[CONTRACT // OPEN FOR HIRE]</span>
+        </button>
+
+        <div id="contact-modal" class="contact-modal">
+            <div class="contact-modal-overlay" id="contact-modal-overlay"></div>
+            
+            <div class="contact-card">
+                <button class="contact-close" id="contact-close" aria-label="Cerrar">&times;</button>
+                
+                <div class="contact-header">
+                    <span class="contact-tag">COMMUNICATIONS_SYS // DIRECT_LINK</span>
+                    <h2 class="contact-title">CONTACTO</h2>
+                </div>
+
+                <div class="contact-body">
+                    <p class="contact-desc">
+                        ¿Tienes un proyecto en mente, una consulta o buscas colaborar? Envíame un mensaje directo.
+                    </p>
+
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <span class="item-label">EMAIL</span>
+                            <a href="mailto:franconuzzon2007@gmail.com" class="item-value">franconuzzon2007@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="item-label">UBICACIÓN</span>
+                            <span class="item-value">Caracas, Venezuela</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="item-label">REDES SOCIALES</span>
+                            <span class="item-value">@franko_uno</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-footer">
+                    <span class="status-indicator"></span>
+                    <span class="footer-code">END_NODE // 0x4F8_READY</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="datamatrix-corner-block">
+            <div class="barcode-lines">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <span class="serial-code">FN-2026 // FORMULA_SPEC</span>
+            <span class="sub-status">STATUS: ONLINE</span>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="js/spotlight.js"></script>
+    <script src="js/tilt.js"></script>
+    <script src="js/glitch.js"></script>
+    <script src="js/hud-cursor.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
