@@ -1035,23 +1035,17 @@ body.no-scroll {
 .tactical-card {
   position: relative;
   width: 100%;
-  max-width: 850px;
-  
-  /* Fondo semitransparente táctico */
-  background: rgba(10, 12, 16, 0.4) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  clip-path: polygon(
-      16px 0, calc(100% - 16px) 0, 
-      100% 16px, 100% calc(100% - 16px), 
-      calc(100% - 16px) 100%, 16px 100%, 
-      0 calc(100% - 16px), 0 16px
-  );
-  padding: 2.5rem 3rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
+  max-width: 900px;
+  /* 1. Fondo más oscuro y opaco (aumentado de 0.5 a 0.88) */
+  background: rgba(7, 8, 11, 0.88) !important; 
+  /* 2. Desenfoque más denso para tapar las líneas del fondo */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  /* 3. Borde con un toque de contraste */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-glow {
@@ -1664,4 +1658,373 @@ body.no-scroll {
 
 .projects-section {
   margin-top: 5vh;
+}
+
+/* ==========================================
+   SECCIÓN EXPERIENCIA (TIMELINE HORIZONTAL)
+   ========================================== */
+.experience-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-main, #070707);
+  overflow: hidden;
+  padding-top: 4rem;
+}
+
+.exp-header-hud {
+  padding: 0 4rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+.exp-header-hud .hud-tag {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.75rem;
+  color: var(--accent-yellow, #F8F546);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.exp-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--text-light, #F4F5F5);
+  line-height: 1;
+}
+
+.exp-sublabel {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.85rem;
+  color: var(--text-muted, #A0AAA9);
+  letter-spacing: 1px;
+}
+
+/* Contenedor Fijo & Track Horizontal */
+.exp-pin-wrapper {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.exp-track {
+  display: flex;
+  gap: 2.5rem;
+  padding: 0 4rem;
+  will-change: transform;
+  width: max-content;
+}
+
+/* Tarjetas de Experiencia */
+.exp-card {
+  width: 420px;
+  min-width: 420px;
+  background: rgba(12, 14, 18, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--accent-yellow, #F8F546);
+  padding: 2.5rem;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.exp-card:hover {
+  border-color: var(--accent-yellow, #F8F546);
+  box-shadow: 0 0 25px rgba(248, 245, 70, 0.15);
+  transform: translateY(-5px);
+}
+
+.exp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.exp-date {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.8rem;
+  color: var(--accent-yellow, #F8F546);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.exp-status-badge {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.65rem;
+  color: var(--text-dark, #7E807C);
+  letter-spacing: 1.5px;
+}
+
+.exp-role {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.8rem;
+  color: var(--text-light, #F4F5F5);
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.exp-company {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.9rem;
+  color: var(--accent-olive, #657136);
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+.exp-desc {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.95rem;
+  color: var(--text-muted, #A0AAA9);
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-light, #F4F5F5);
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+}
+
+/* Tarjeta Final de Registro */
+.exp-card-end {
+  border-left-color: var(--accent-olive, #657136);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.exp-end-content .exp-end-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.exp-end-content h3 {
+  font-family: var(--font-display, sans-serif);
+  font-size: 2rem;
+  color: var(--text-light, #F4F5F5);
+  margin-bottom: 0.5rem;
+}
+
+.exp-end-content p {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.9rem;
+  color: var(--text-muted, #A0AAA9);
+  margin-bottom: 1.5rem;
+}
+
+.exp-end-content .hud-status {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.75rem;
+  color: var(--accent-yellow, #F8F546);
+  letter-spacing: 2px;
+}
+
+/* ==========================================
+   FOOTER TÁCTICO & EFECTO GLITCH
+   ========================================== */
+.tactical-footer {
+  position: relative;
+  width: 100%;
+  background: #040404;
+  border-top: 1px solid rgba(248, 245, 70, 0.3);
+  padding: 4rem 4rem 2rem 4rem;
+  overflow: hidden;
+}
+
+/* Capa de Glitch para la Transición */
+.glitch-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(248, 245, 70, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+}
+
+.glitch-overlay.active-glitch {
+  animation: glitchFlash 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes glitchFlash {
+  0% { opacity: 0; transform: scale(1); filter: invert(0); }
+  20% { opacity: 0.9; transform: translate(-8px, 6px) scale(1.02); filter: invert(0.8); }
+  40% { opacity: 0.3; transform: translate(6px, -6px) scale(0.98); }
+  60% { opacity: 1; transform: translate(-4px, -3px); filter: hue-rotate(90deg); }
+  80% { opacity: 0.5; transform: translate(4px, 2px); }
+  100% { opacity: 0; transform: translate(0, 0); }
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 2rem;
+}
+
+.footer-logo {
+  font-family: var(--font-display, sans-serif);
+  font-size: 2.2rem;
+  color: var(--text-light, #F4F5F5);
+  letter-spacing: 2px;
+}
+
+.footer-tagline {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.8rem;
+  color: var(--text-muted, #A0AAA9);
+  letter-spacing: 1px;
+  margin-top: 0.3rem;
+}
+
+.btn-reboot-top {
+  background: transparent;
+  border: 1px solid var(--accent-yellow, #F8F546);
+  color: var(--accent-yellow, #F8F546);
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-reboot-top:hover {
+  background: var(--accent-yellow, #F8F546);
+  color: #000;
+  box-shadow: 0 0 20px rgba(248, 245, 70, 0.4);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+}
+
+.footer-col h4 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.8rem;
+  color: var(--accent-yellow, #F8F546);
+  letter-spacing: 1.5px;
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-link {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.9rem;
+  color: var(--text-muted, #A0AAA9);
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: var(--text-light, #F4F5F5);
+  transform: translateX(4px);
+}
+
+.system-status-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.8rem;
+  color: var(--accent-olive, #657136);
+  background: rgba(101, 113, 54, 0.1);
+  padding: 0.8rem 1.2rem;
+  border: 1px solid rgba(101, 113, 54, 0.3);
+  border-radius: 4px;
+}
+
+.status-indicator.online {
+  width: 8px;
+  height: 8px;
+  background-color: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff88;
+  animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.5rem;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.75rem;
+  color: var(--text-dark, #7E807C);
+}
+
+@media (max-width: 768px) {
+  .exp-header-hud {
+    padding: 0 1.5rem;
+  }
+  .exp-track {
+    padding: 0 1.5rem;
+    gap: 1.5rem;
+  }
+  .exp-card {
+    width: 310px;
+    min-width: 310px;
+    padding: 1.5rem;
+  }
+  .tactical-footer {
+    padding: 2rem;
+  }
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
 }

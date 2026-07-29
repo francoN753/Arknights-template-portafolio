@@ -18,7 +18,6 @@ function initTacticalParallax() {
 
   // Escuchar el movimiento del mouse
   window.addEventListener('mousemove', (e) => {
-    // Normalizar del -1 al 1 tomando el centro como punto 0,0
     targetX = (e.clientX - windowHalfX) / windowHalfX;
     targetY = (e.clientY - windowHalfY) / windowHalfY;
   });
@@ -30,35 +29,26 @@ function initTacticalParallax() {
   });
 
   // Factores de desplazamiento (Intensidad en PX)
-  // Valores negativos en el fondo para crear sentido de perspectiva invertida/profundidad
   const DEPTH = {
-    bg: -12,      // Fondo: Desplazamiento mínimo e inverso
-    mid: 22,      // Marquee: Desplazamiento medio
-    fore: 45,     // NUZZO: Desplazamiento principal
-    tagline: 30   // Subtítulo: Desplazamiento intermedio-alto
+    bg: -12,
+    mid: 22,
+    fore: 45,
+    tagline: 30
   };
 
   function render() {
-    // LERP: 0.06 controla la "inercia" del movimiento (más bajo = más suave)
     currentX += (targetX - currentX) * 0.06;
     currentY += (targetY - currentY) * 0.06;
 
-    // 1. Capa Fondo (REF_GRID / HUD Vectors)
     if (bgLayer) {
       bgLayer.style.transform = `translate3d(${currentX * DEPTH.bg}px, ${currentY * DEPTH.bg}px, 0)`;
     }
-
-    // 2. Capa Intermedia (Marquee Text)
     if (midLayer) {
       midLayer.style.transform = `translate3d(${currentX * DEPTH.mid}px, ${currentY * DEPTH.mid}px, 0)`;
     }
-
-    // 3. Capa Frontal (NUZZO)
     if (foreLayer) {
       foreLayer.style.transform = `translate3d(${currentX * DEPTH.fore}px, ${currentY * DEPTH.fore}px, 0)`;
     }
-
-    // 4. Tagline Superior
     if (taglineLayer) {
       taglineLayer.style.transform = `translate3d(${currentX * DEPTH.tagline}px, ${currentY * DEPTH.tagline}px, 0)`;
     }
@@ -88,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // TRANSICIÓN CINEMÁTICA: HERO → SOBRE MÍ ("TACTICAL BREACH")
     // ═══════════════════════════════════════════════════════════
 
-    const heroChars = document.querySelectorAll("#glitch-title .char");
     const tacticalCard = document.querySelector(".tactical-card");
     const cardCrosshairs = document.querySelectorAll(".corner-crosshair");
     const cardHeader = document.querySelector(".card-header");
@@ -97,10 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardBio = document.querySelector(".card-bio");
     const specItems = document.querySelectorAll(".spec-item");
     const cardFooter = document.querySelector(".card-footer");
-    const scanLine = document.querySelector(".scan-line");
-    const breachFlash = document.querySelector(".breach-flash");
 
-    // Estado inicial: tarjeta y contenidos con valores sutiles de entrada
+    // Estado inicial de la tarjeta "Sobre Mí"
     if (tacticalCard) {
         gsap.set(tacticalCard, {
             opacity: 0,
@@ -116,59 +103,51 @@ document.addEventListener("DOMContentLoaded", () => {
     if (specItems.length) gsap.set(specItems, { opacity: 0, y: 15 });
     if (cardFooter) gsap.set(cardFooter, { opacity: 0, y: 8 });
 
-    // ── TIMELINE PRINCIPAL (Transición sutil y orgánica) ──
+    // Timeline Principal
     const breachTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#hero",
             start: "top top",
-            end: "bottom top",     // Vinculado exactamente al desplazamiento natural del Hero
-            scrub: 0.5             // Scrub muy suave y continuo
+            end: "bottom top",
+            scrub: 0.5
         }
     });
 
-    // ════════════════════════════════════════
-    // FASE 1: DESVANECIMIENTO SUAVE DEL HERO (0 → 0.5)
-    // ════════════════════════════════════════
+    // ═══════════════════════════════════════════════════════════
+    // FASE 1: DESVANECIMIENTO TOTAL DE TODO EL HUD Y ELEMENTOS DE HERO
+    // ═══════════════════════════════════════════════════════════
 
-    // 1a. Título NUZZO se eleva suavemente y se desvanece
-    breachTl.to(".hero-title-wrapper", {
-        y: -40,
+    // Seleccionamos absolutamente TODOS los elementos decorativos, textos laterales y paneles del Hero
+    const allHeroElements = document.querySelectorAll(`
+        #tactical-flashlight,
+        .tactical-bg,
+        .marquee-bg,
+        .hero-title-wrapper,
+        .hero-tagline,
+        .hero-footer-info,
+        .hero-footer,
+        .hud-callout,
+        .hud-callouts,
+        .hud-left,
+        .hud-right,
+        .hud-corners,
+        .hud-decor,
+        .barcode,
+        #cyber-core,
+        #hero > *:not(.about-section):not(#sobre-mi)
+    `);
+
+    // Al rotar la rueda un milímetro (t = 0), todo el escenario exterior se desvanece de inmediato
+    breachTl.to(allHeroElements, {
         opacity: 0,
-        filter: "blur(6px)",
-        duration: 0.3,
+        duration: 0.05,
         ease: "power1.out"
     }, 0);
 
-    // 1b. Subtítulo y pie de info se desvanecen
-    breachTl.to(".hero-tagline, .hero-footer-info", {
-        y: -25,
-        opacity: 0,
-        duration: 0.25,
-        ease: "power1.out"
-    }, 0);
+    // ═══════════════════════════════════════════════════════════
+    // FASE 2: ENTRADA LIMPIA DE LA TARJETA "CONTRACT / SOBRE MÍ"
+    // ═══════════════════════════════════════════════════════════
 
-    // 1c. Esfera 3D (cyber-core) se desvanece con leve expansión
-    breachTl.to("#cyber-core", {
-        scale: 1.8,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power1.out"
-    }, 0);
-
-    // 1d. Callouts del HUD del hero
-    breachTl.to(".hud-callout", {
-        opacity: 0,
-        y: -15,
-        stagger: 0.02,
-        duration: 0.2,
-        ease: "power1.out"
-    }, 0);
-
-    // ════════════════════════════════════════
-    // FASE 2: ENTRADA SUAVE DE "SOBRE MÍ" (0.4 → 1.0)
-    // ════════════════════════════════════════
-
-    // 2a. Tarjeta principal se desliza hacia arriba con transparencia suave
     if (tacticalCard) {
         breachTl.to(tacticalCard, {
             opacity: 1,
@@ -179,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 0.35);
     }
 
-    // 2b. Esquinas crosshair
     if (cardCrosshairs.length) {
         breachTl.to(cardCrosshairs, {
             opacity: 1,
@@ -190,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 0.45);
     }
 
-    // 2c. Contenido interno de la tarjeta en cascada sutil
     if (cardHeader) breachTl.to(cardHeader, { opacity: 1, y: 0, duration: 0.15 }, 0.5);
     if (cardSubLabel) breachTl.to(cardSubLabel, { opacity: 1, x: 0, duration: 0.15 }, 0.55);
     if (cardMainTitle) breachTl.to(cardMainTitle, { opacity: 1, y: 0, duration: 0.2 }, 0.58);
