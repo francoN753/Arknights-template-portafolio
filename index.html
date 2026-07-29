@@ -31,18 +31,24 @@
     </div>
 
     <header class="navbar">
-        <nav class="nav-group nav-left">
-            <a href="#proyectos">Proyectos</a>
-            <a href="#sobre-mi">Sobre mí</a>
-        </nav>
-
         <a href="#" class="nav-logo">FORMULA FN</a>
 
-        <nav class="nav-group nav-right">
-            <a href="https://github.com/francoN753" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://instagram.com/franko_uno" target="_blank" rel="noopener">Instagram</a>
-        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+            <span class="toggle-text">[ MENU // NAV ]</span>
+        </button>
+
+        <div class="nav-content" id="nav-content">
+            <nav class="nav-group nav-left">
+                <a href="#proyectos">Proyectos</a>
+                <a href="#sobre-mi">Sobre mí</a>
+            </nav>
+
+            <nav class="nav-group nav-right">
+                <a href="https://github.com/francoN753" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://instagram.com/franko_uno" target="_blank" rel="noopener">Instagram</a>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -106,8 +112,6 @@
             <div id="tactical-flashlight"></div>
 
             <div class="hero-content">
-                <p class="hero-tagline">Ingeniería & Desarrollo Software</p>
-
                 <div class="hero-title-wrapper">
                     <div class="marquee-bg" aria-hidden="true">
                         <div class="marquee-track">
@@ -123,6 +127,8 @@
                         <span class="char" data-char="O">O</span>
                     </h1>
                 </div>
+
+                <p class="hero-tagline">Ingeniería & Desarrollo Software</p>
 
                 <div class="hero-footer-info">
                     <span>Desplázate para explorar</span>
@@ -218,6 +224,30 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/cyber-core.js"></script>
+    <script src="js/parallax.js"></script>
+    <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const navContent = document.getElementById('nav-content');
+    const toggleText = navToggle ? navToggle.querySelector('.toggle-text') : null;
+
+    if (navToggle && navContent) {
+        navToggle.addEventListener('click', () => {
+            navContent.classList.toggle('is-open');
+            const isOpen = navContent.classList.contains('is-open');
+            if (toggleText) {
+                toggleText.textContent = isOpen ? '[ X // CERRAR ]' : '[ MENU // NAV ]';
+            }
+        });
+
+        // Cierra el menú automáticamente al hacer clic en cualquier enlace
+        navContent.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navContent.classList.remove('is-open');
+                if (toggleText) toggleText.textContent = '[ MENU // NAV ]';
+            });
+        });
+    }
+    </script>
 </body>
 
 </html>

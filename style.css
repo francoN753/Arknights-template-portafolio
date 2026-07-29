@@ -106,6 +106,141 @@ html, body {
   color: var(--accent-olive);
 }
 
+/* ==========================================
+   MANTENER GRID EN ESCRITORIO (> 900px)
+   ========================================== */
+.nav-toggle {
+    display: none;
+}
+
+.nav-content {
+    display: contents; /* Desmonta el contenedor para que la grilla del navbar funcione directo */
+}
+
+.nav-left { order: 1; }
+.nav-logo { order: 2; }
+.nav-right { order: 3; }
+
+
+/* ==========================================
+   NAVBAR RESPONSIVE (< 900px)
+   ========================================== */
+@media (max-width: 900px) {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 1.5rem;
+        mix-blend-mode: normal;
+        z-index: 1000;
+    }
+
+    .nav-logo {
+        font-size: 1.4rem;
+        z-index: 1001;
+    }
+
+    /* Botón Táctico de Menú */
+    .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #070707;
+        border: 1px solid var(--accent-yellow);
+        color: var(--accent-yellow);
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        padding: 0.5rem 0.9rem;
+        cursor: pointer;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+        transition: all 0.25s ease;
+        z-index: 1001;
+    }
+
+    .nav-toggle:hover {
+        background-color: var(--accent-yellow);
+        color: #000000;
+    }
+
+    /* Menú desplegable a pantalla completa */
+    .nav-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(7, 7, 7, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .nav-content.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .nav-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .navbar a {
+        font-size: 1.1rem;
+        letter-spacing: 0.2em;
+    }
+
+    /* Línea divisora entre grupos de links */
+    .nav-left::after {
+        content: '';
+        width: 50px;
+        height: 1px;
+        background-color: var(--accent-yellow);
+        opacity: 0.3;
+        margin-top: 1rem;
+    }
+
+    /* 1. Ocultar el título (NUZZO + Marquee) a menos de 900px */
+    .hero-title-wrapper {
+        display: none !important;
+    }
+
+    /* 2. Ocultar el texto "Desplázate para explorar" */
+    .hero-footer-info {
+        display: none !important;
+    }
+
+    /* 3. Reajustar el contenido central */
+    .hero-content {
+        justify-content: center;
+        padding-top: 0;
+        gap: 1rem;
+    }
+}
+
+/* Ocultar elementos de escritorio y activar versión móvil antes de los 900px */
+@media (max-width: 1024px) {
+    .desktop-nav, 
+    .nav-links {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+}
+
 
 /* ==========================================
    3. SECCIÓN HERO (ESTRUCTURA Y MARCO)
@@ -275,7 +410,7 @@ html, body {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: 42vw;
+  font-size: 30vw;
   letter-spacing: -0.03em;
   line-height: 0.7;
   color: var(--text-light);
@@ -931,4 +1066,18 @@ body.no-scroll {
   );
   mix-blend-mode: screen;
   will-change: background;
+}
+
+/* Optimización de hardware para las capas del Parallax */
+.tactical-bg,
+.marquee-bg,
+#glitch-title,
+.hero-tagline {
+  will-change: transform;
+  transition: transform 0.1s ease-out; /* Suaviza microrsaltos al mover el mouse */
+}
+
+/* Evita desbordamiento si las capas se desplazan hacia los extremos */
+.hero-section {
+  overflow: hidden;
 }
