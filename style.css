@@ -237,18 +237,64 @@ html.lenis, html.lenis body {
 
 
 /* ==========================================
-   4. SECCIÓN "SOBRE MÍ" (CORREGIDO)
+   3.5. EFECTOS DE TRANSICIÓN CINEMÁTICA (HERO → SOBRE MÍ)
+   ========================================== */
+.transition-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.breach-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(248, 245, 70, 0.25) 0%,
+    rgba(248, 245, 70, 0.08) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  will-change: opacity;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(248, 245, 70, 0.1) 15%,
+    rgba(248, 245, 70, 0.6) 50%,
+    rgba(248, 245, 70, 0.1) 85%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 20px rgba(248, 245, 70, 0.4),
+    0 0 60px rgba(248, 245, 70, 0.15);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+
+/* ==========================================
+   4. SECCIÓN "SOBRE MÍ" (OPTIMIZADA PARA ANIMACIÓN)
    ========================================== */
 .about-section {
-  position: relative; /* <-- Cambiado de absolute a relative */
+  position: relative;
   width: 100%;
-  min-height: 100vh;  /* <-- Le da altura completa de pantalla */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4rem 2rem;
   z-index: 20;
-  opacity: 1;         /* <-- Visible en el flujo normal (o animado vía GSAP si usas ScrollTrigger) */
+  opacity: 1;
   pointer-events: auto;
   perspective: 1500px;
   background-color: transparent !important;
@@ -480,8 +526,10 @@ html.lenis, html.lenis body {
 /* ==========================================
    7. CURSOR HUD Y SIDEBAR IZQUIERDA
    ========================================== */
-#hero, #hero * {
-  cursor: none !important;
+@media (min-width: 901px) {
+  html, body, body *, a, button {
+    cursor: none !important;
+  }
 }
 
 .hud-cursor {
@@ -493,7 +541,7 @@ html.lenis, html.lenis body {
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.15s ease;
   transform: translate(-50%, -50%);
 }
 
@@ -505,8 +553,15 @@ html.lenis, html.lenis body {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(248, 245, 70, 0.4);
+  border: 1px solid rgba(248, 245, 70, 0.45);
   border-radius: 2px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hud-cursor.hovering .reticle {
+  transform: scale(1.35);
+  border-color: var(--accent-yellow);
+  box-shadow: 0 0 12px rgba(248, 245, 70, 0.6);
 }
 
 .hud-cursor .reticle::before,

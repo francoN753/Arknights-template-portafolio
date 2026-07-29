@@ -83,61 +83,61 @@
     </header>
 
     <main>
-        <section class="hero-section" id="hero">
-            
-            <div class="tactical-bg">
-                <div class="bg-dots-grid"></div>
+        <div class="tactical-bg">
+            <div class="bg-dots-grid"></div>
 
-                <svg class="hud-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                    <defs>
-                        <pattern id="dot-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                            <circle cx="2" cy="2" r="1" fill="rgba(255, 255, 255, 0.15)" />
-                        </pattern>
-                    </defs>
+            <svg class="hud-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <defs>
+                    <pattern id="dot-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="1" fill="rgba(255, 255, 255, 0.15)" />
+                    </pattern>
+                </defs>
 
-                    <g class="hud-vectors" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" fill="none">
-                        <line x1="50%" y1="10%" x2="50%" y2="90%" stroke-dasharray="4 8" />
-                        <line x1="5%" y1="50%" x2="95%" y2="50%" stroke-dasharray="4 8" />
-                        <circle cx="50%" cy="50%" r="220" stroke-dasharray="2 12" />
-                        <circle cx="50%" cy="50%" r="380" stroke-dasharray="1 20" />
+                <g class="hud-vectors" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" fill="none">
+                    <line x1="50%" y1="10%" x2="50%" y2="90%" stroke-dasharray="4 8" />
+                    <line x1="5%" y1="50%" x2="95%" y2="50%" stroke-dasharray="4 8" />
+                    <circle cx="50%" cy="50%" r="220" stroke-dasharray="2 12" />
+                    <circle cx="50%" cy="50%" r="380" stroke-dasharray="1 20" />
 
-                        <path d="M 20% 25% L 20% 27% M 19% 26% L 21% 26%" stroke-width="2" />
-                        <path d="M 80% 25% L 80% 27% M 79% 26% L 81% 26%" stroke-width="2" />
-                        <path d="M 20% 75% L 20% 77% M 19% 76% L 21% 76%" stroke-width="2" />
-                        <path d="M 80% 75% L 80% 77% M 79% 76% L 81% 76%" stroke-width="2" />
-                    </g>
+                    <path d="M 20% 25% L 20% 27% M 19% 26% L 21% 26%" stroke-width="2" />
+                    <path d="M 80% 25% L 80% 27% M 79% 26% L 81% 26%" stroke-width="2" />
+                    <path d="M 20% 75% L 20% 77% M 19% 76% L 21% 76%" stroke-width="2" />
+                    <path d="M 80% 75% L 80% 77% M 79% 76% L 81% 76%" stroke-width="2" />
+                </g>
 
-                    <g class="hud-corners" stroke="rgba(248, 245, 70, 0.3)" stroke-width="1.5" fill="none">
-                        <path d="M 30,60 L 30,30 L 60,30" />
-                        <path d="M 30, calc(100% - 60) L 30, calc(100% - 30) L 60, calc(100% - 30)" />
-                        <path d="M calc(100% - 60),30 L calc(100% - 30),30 L calc(100% - 30),60" />
-                        <path d="M calc(100% - 60), calc(100% - 30) L calc(100% - 30), calc(100% - 30) L calc(100% - 30), calc(100% - 60)" />
-                    </g>
-                </svg>
+                <g class="hud-corners" stroke="rgba(248, 245, 70, 0.3)" stroke-width="1.5" fill="none">
+                    <path d="M 30,60 L 30,30 L 60,30" />
+                    <path d="M 30, calc(100% - 60) L 30, calc(100% - 30) L 60, calc(100% - 30)" />
+                    <path d="M calc(100% - 60),30 L calc(100% - 30),30 L calc(100% - 30),60" />
+                    <path d="M calc(100% - 60), calc(100% - 30) L calc(100% - 30), calc(100% - 30) L calc(100% - 30), calc(100% - 60)" />
+                </g>
+            </svg>
 
-                <div class="geo-shape geo-bar-top-right"></div>
-                <div class="geo-shape geo-box-mid-left"></div>
+            <div class="geo-shape geo-bar-top-right"></div>
+            <div class="geo-shape geo-box-mid-left"></div>
 
-                <div class="hud-callout callout-top-center">
-                    <span>[ REF_GRID // 0x99A ]</span>
-                    <div class="callout-bar"></div>
-                </div>
-
-                <div class="hud-callout callout-mid-right">
-                    <span>UNIT_STATUS // ACTIVE</span>
-                    <span>SYS_VER // 2.6.0</span>
-                    <span>SYS.LOC // 10.4806° N</span>
-                </div>
-
-                <div class="hud-callout callout-bottom-left">
-                    <span class="yellow-tag">NUZZO_CORE</span>
-                    <span class="dim-text">SYSTEM_READY // 0x4F8</span>
-                </div>
-
-                <div class="hud-callout callout-bottom-center">
-                    <span>▲ CAUTION // HIGH DENSITY HUD DATA ▲</span>
-                </div>
+            <div class="hud-callout callout-top-center">
+                <span>[ REF_GRID // 0x99A ]</span>
+                <div class="callout-bar"></div>
             </div>
+
+            <div class="hud-callout callout-mid-right">
+                <span>UNIT_STATUS // ACTIVE</span>
+                <span>SYS_VER // 2.6.0</span>
+                <span>SYS.LOC // 10.4806° N</span>
+            </div>
+
+            <div class="hud-callout callout-bottom-left">
+                <span class="yellow-tag">NUZZO_CORE</span>
+                <span class="dim-text">SYSTEM_READY // 0x4F8</span>
+            </div>
+
+            <div class="hud-callout callout-bottom-center">
+                <span>▲ CAUTION // HIGH DENSITY HUD DATA ▲</span>
+            </div>
+        </div>
+
+        <section class="hero-section" id="hero">
 
             <div id="cyber-core"></div>
             <div id="tactical-flashlight"></div>
@@ -166,7 +166,15 @@
                 </div>
             </div>
 
-        </section> <section id="sobre-mi" class="about-section">
+        </section>
+
+        <!-- Efectos de transición cinemática Hero → Sobre Mí -->
+        <div class="transition-fx" aria-hidden="true">
+            <div class="breach-flash"></div>
+            <div class="scan-line"></div>
+        </div>
+
+        <section id="sobre-mi" class="about-section">
             <div class="tactical-card">
                 <div class="card-glow"></div>
 
