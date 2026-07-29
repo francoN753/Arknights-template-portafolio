@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
             trigger: "#hero",
             start: "top top",
-            end: "+=180%",
+            end: "+=150%",
             scrub: 1,
             pin: true,
             anticipatePin: 1
@@ -25,24 +25,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     portalTl
-        // 1. Oculta título "NUZZO" y HUD
-        .to(".hero-content, .hud-callout, .tactical-sidebar, .availability-badge-bottom, .datamatrix-corner-block", {
+        // 1. Oculta el título "NUZZO" y los HUD de los bordes
+        .to("#glitch-title, .hero-tagline, .hero-footer-info, .hud-callout, .tactical-sidebar, .availability-badge-bottom, .datamatrix-corner-block", {
             opacity: 0,
             y: -30,
             duration: 0.4,
             ease: "power1.out"
         }, 0)
 
-        // 2. Zoom In de la figura 3D y apaga el spotlight
-        .to("#cyber-core, #tactical-flashlight", {
-            scale: 5,
+        // 2. Desvanece la esfera 3D central
+        .to("#cyber-core", {
+            scale: 4,
             opacity: 0,
-            duration: 1,
+            duration: 0.8,
             ease: "power2.in"
         }, 0)
 
-        // 3. Hace aparecer la tarjeta "Sobre Mí" en el centro exacto del fondo existente
-        .fromTo(".about-section", 
+        // 3. ATENÚA el spotlight al 15% (Luz ambiental tenue para iluminar la cuadrícula sin deslumbrar)
+        .to("#tactical-flashlight", {
+            opacity: 0.15,
+            duration: 0.8,
+            ease: "power2.in"
+        }, 0)
+
+        // 4. Muestra la tarjeta "Sobre Mí" sobre la retícula iluminada
+        .fromTo("#sobre-mi", 
             { 
                 opacity: 0, 
                 y: 40,
@@ -55,6 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 duration: 0.6, 
                 ease: "power2.out" 
             },
-            0.5 // Aparece justo cuando la figura 3D termina de desvanecerse
+            0.4
         );
 });
