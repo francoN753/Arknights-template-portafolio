@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: {
             trigger: "#hero",
             start: "top top",
-            end: "+=150%",
+            end: "+=180%",
             scrub: 1,
             pin: true,
             anticipatePin: 1
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     portalTl
-        // 1. Desvanece los textos e interfaz HUD del hero
+        // 1. Oculta título "NUZZO" y HUD
         .to(".hero-content, .hud-callout, .tactical-sidebar, .availability-badge-bottom, .datamatrix-corner-block", {
             opacity: 0,
             y: -30,
@@ -33,18 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "power1.out"
         }, 0)
 
-        // 2. Agranda y desvanece el núcleo 3D
-        .to("#cyber-core", {
+        // 2. Zoom In de la figura 3D y apaga el spotlight
+        .to("#cyber-core, #tactical-flashlight", {
             scale: 5,
             opacity: 0,
             duration: 1,
             ease: "power2.in"
         }, 0)
 
-        // 3. Desvanece progresivamente el spotlight hasta apagarlo por completo
-        .to("#tactical-flashlight", {
-            opacity: 0,
-            duration: 1,
-            ease: "power2.in"
-        }, 0);
+        // 3. Hace aparecer la tarjeta "Sobre Mí" en el centro exacto del fondo existente
+        .fromTo(".about-section", 
+            { 
+                opacity: 0, 
+                y: 40,
+                pointerEvents: "none"
+            },
+            { 
+                opacity: 1, 
+                y: 0, 
+                pointerEvents: "auto",
+                duration: 0.6, 
+                ease: "power2.out" 
+            },
+            0.5 // Aparece justo cuando la figura 3D termina de desvanecerse
+        );
 });

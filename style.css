@@ -1102,3 +1102,180 @@ body.no-scroll {
     transform-origin: center center !important;
     will-change: transform, opacity;
 }
+
+/* ==========================================
+   TARJETA TÁCTICA SOBRE MÍ (HUD ULTRA TRANSPARENTE)
+   ========================================== */
+
+.about-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    z-index: 20;
+    opacity: 0; /* Inicia invisible */
+    pointer-events: none; /* Evita clics mientras está oculta */
+}
+
+.tactical-card {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+    
+    /* Fondo ultra transparente y blur mínimo para dejar ver el fondo y la marquesina */
+    background: rgba(10, 12, 16, 0.25);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    
+    /* Borde fino táctico */
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    
+    /* Biselado táctico en las esquinas */
+    clip-path: polygon(
+        16px 0, calc(100% - 16px) 0, 
+        100% 16px, 100% calc(100% - 16px), 
+        calc(100% - 16px) 100%, 16px 100%, 
+        0 calc(100% - 16px), 0 16px
+    );
+    padding: 2.5rem 3rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+/* Luz tenue blanca en el centro de la tarjeta */
+.card-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+}
+
+/* Cruces tácticas en las esquinas (+) */
+.corner-crosshair {
+    position: absolute;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.45);
+    pointer-events: none;
+}
+.corner-crosshair.top-left { top: 10px; left: 14px; }
+.corner-crosshair.top-right { top: 10px; right: 14px; }
+.corner-crosshair.bottom-left { bottom: 10px; left: 14px; }
+.corner-crosshair.bottom-right { bottom: 10px; right: 14px; }
+
+/* Cabecera */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 0.75rem;
+    margin-bottom: 2rem;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.card-title-tag {
+    color: #f8f546; /* Amarillo táctico */
+}
+
+/* Contenido */
+.card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.sub-label {
+    display: block;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 2px;
+    margin-bottom: 0.25rem;
+}
+
+.card-main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: #ffffff;
+    margin: 0 0 1.2rem 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+}
+
+.card-bio {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 700px;
+    margin-bottom: 2.2rem;
+}
+
+/* Malla de Especificaciones con máxima transparencia */
+.tech-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.spec-label {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 1px;
+}
+
+.spec-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Pie de página */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #f8f546;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #f8f546;
+}
