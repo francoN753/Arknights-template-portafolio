@@ -237,23 +237,21 @@ html.lenis, html.lenis body {
 
 
 /* ==========================================
-   4. SECCIÓN "SOBRE MÍ" (CONTENEDOR TRANSPARENTE)
+   4. SECCIÓN "SOBRE MÍ" (CORREGIDO)
    ========================================== */
 .about-section {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative; /* <-- Cambiado de absolute a relative */
   width: 100%;
-  height: 100%;
+  min-height: 100vh;  /* <-- Le da altura completa de pantalla */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 4rem 2rem;
   z-index: 20;
-  opacity: 0; /* Inicia oculto para la animación de GSAP */
-  pointer-events: none;
+  opacity: 1;         /* <-- Visible en el flujo normal (o animado vía GSAP si usas ScrollTrigger) */
+  pointer-events: auto;
   perspective: 1500px;
-  background-color: transparent !important; /* CORREGIDO: Totalmente transparente */
+  background-color: transparent !important;
 }
 
 
@@ -1262,4 +1260,353 @@ body.no-scroll {
     padding-top: 0;
     gap: 1rem;
   }
+}
+
+/* ==========================================
+   SECCIÓN PROYECTOS / SIGUIENTE APARTADO
+   ========================================== */
+.projects-section {
+  position: relative;
+  z-index: 25;
+  min-height: 100vh;
+  width: 100%;
+  padding: 8rem 4rem 4rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important; /* Mantiene la retícula táctica visible */
+}
+
+.projects-container {
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* Cabecera HUD de sección */
+.section-header-hud {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hud-tag {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  color: var(--accent-yellow);
+  letter-spacing: 2px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  color: var(--text-light);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.hud-header-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-yellow) 0%, rgba(255, 255, 255, 0.1) 80%);
+  margin-top: 0.5rem;
+}
+
+/* Malla de Proyectos */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.project-card {
+  position: relative;
+  background: rgba(12, 14, 18, 0.5) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--accent-yellow);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(248, 245, 70, 0.15);
+}
+
+.project-badge {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: var(--text-dark);
+  letter-spacing: 1.5px;
+  margin-bottom: 0.8rem;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--text-light);
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.project-desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.project-tech {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.project-tech span {
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  color: var(--accent-yellow);
+  border: 1px solid rgba(248, 245, 70, 0.3);
+  padding: 0.2rem 0.6rem;
+  background: rgba(248, 245, 70, 0.05);
+}
+/* ==========================================
+   PERSIANAS TÁCTICAS HUD (ACCESS LOCK SHUTTERS)
+   ========================================== */
+.hud-shutters-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shutter-panel {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background-color: #070707;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem 3rem;
+  will-change: transform;
+}
+
+.shutter-top {
+  top: 0;
+  transform: translateY(-100%);
+  border-bottom: 2px solid var(--accent-yellow, #f8f546);
+}
+
+.shutter-bottom {
+  bottom: 0;
+  transform: translateY(100%);
+  border-top: 2px solid var(--accent-yellow, #f8f546);
+  align-items: flex-start;
+}
+
+.shutter-edge-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent-yellow, #f8f546);
+  box-shadow: 0 0 15px var(--accent-yellow, #f8f546);
+}
+.shutter-top .shutter-edge-line { bottom: 0; }
+.shutter-bottom .shutter-edge-line { top: 0; }
+
+.shutter-tech-details {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.65rem;
+  color: var(--text-muted, #888);
+  letter-spacing: 2px;
+  display: flex;
+  gap: 2rem;
+  text-transform: uppercase;
+}
+
+/* CAJA DE CARGA CENTRAL */
+.shutter-loader {
+  position: relative;
+  z-index: 10000;
+  background: rgba(10, 12, 16, 0.95);
+  border: 1px solid var(--accent-yellow, #f8f546);
+  padding: 1.5rem 2.5rem;
+  text-align: center;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  box-shadow: 0 0 30px rgba(248, 245, 70, 0.2);
+  opacity: 0;
+  transform: scale(0.8);
+  will-change: transform, opacity;
+}
+
+.loader-code {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.6rem;
+  color: var(--accent-yellow, #f8f546);
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.loader-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.8rem;
+  color: var(--text-light, #fff);
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.loader-bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.loader-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent-yellow, #f8f546);
+  box-shadow: 0 0 10px var(--accent-yellow, #f8f546);
+}
+
+/* ESTILOS DE LA SECCIÓN PROYECTOS */
+.projects-section {
+  position: relative;
+  z-index: 25;
+  min-height: 100vh;
+  width: 100%;
+  padding: 8rem 4rem 4rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important;
+}
+
+.projects-container {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.section-header-hud {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hud-tag {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.7rem;
+  color: var(--accent-yellow, #f8f546);
+  letter-spacing: 2px;
+}
+
+.section-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 3.5rem;
+  color: var(--text-light, #fff);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.hud-header-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-yellow, #f8f546) 0%, rgba(255, 255, 255, 0.1) 80%);
+  margin-top: 0.5rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.project-card {
+  position: relative;
+  background: rgba(12, 14, 18, 0.5) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--accent-yellow, #f8f546);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(248, 245, 70, 0.15);
+}
+
+.project-badge {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.6rem;
+  color: var(--text-dark, #aaa);
+  letter-spacing: 1.5px;
+  margin-bottom: 0.8rem;
+}
+
+.project-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.8rem;
+  color: var(--text-light, #fff);
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.project-desc {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.85rem;
+  color: var(--text-muted, #ccc);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.project-tech {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.project-tech span {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.6rem;
+  color: var(--accent-yellow, #f8f546);
+  border: 1px solid rgba(248, 245, 70, 0.3);
+  padding: 0.2rem 0.6rem;
+  background: rgba(248, 245, 70, 0.05);
+}
+
+/* Espaciado para la lectura de la tarjeta Sobre Mí */
+.about-section {
+  padding-bottom: 12vh;
+}
+
+.projects-section {
+  margin-top: 5vh;
 }

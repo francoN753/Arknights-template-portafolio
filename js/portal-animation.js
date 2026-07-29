@@ -1,67 +1,61 @@
-// js/portal-animation.js
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+        console.error("GSAP o ScrollTrigger no están cargados correctamente.");
+        return;
+    }
 
-document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-    });
+    const shutterTop = document.querySelector(".shutter-top");
+    const shutterBottom = document.querySelector(".shutter-bottom");
+    const shutterLoader = document.querySelector(".shutter-loader");
+    const loaderBar = document.querySelector(".loader-bar-fill");
+    const projectsSection = document.querySelector("#proyectos");
+    const projectCards = document.querySelectorAll(".project-card");
+    const sectionHeader = document.querySelector(".section-header-hud");
 
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
+    if (!projectsSection || !shutterTop || !shutterBottom) return;
 
-    const portalTl = gsap.timeline({
+    // Timeline de animación
+    const shutterTl = gsap.timeline({
         scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "+=150%",
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1
+            trigger: "#proyectos",
+            start: "top 35%",    // Se activa SOLO cuando 'Proyectos' sube al tercio superior de la pantalla
+            end: "top 0%",       // Finaliza cuando 'Proyectos' llega al tope
+            scrub: 1,            // Sincronización fluida con el scroll
+            onLeaveBack: () => {
+                // Asegura abrir persianas si el usuario vuelve hacia "Sobre Mí"
+                gsap.to(shutterTop, { y: "-100%", duration: 0.3 });
+                gsap.to(shutterBottom, { y: "100%", duration: 0.3 });
+            }
         }
     });
 
-    portalTl
-        // 1. Oculta el título "NUZZO" y los HUD de los bordes
-        .to("#glitch-title, .hero-tagline, .hero-footer-info, .hud-callout, .tactical-sidebar, .availability-badge-bottom, .datamatrix-corner-block", {
-            opacity: 0,
-            y: -30,
-            duration: 0.4,
-            ease: "power1.out"
-        }, 0)
+    shutterTl
+        // 1. Cierre de persianas tácticas
+        .to(shutterTop, { y: "0%", ease: "power2.inOut" }, 0)
+        .to(shutterBottom, { y: "0%", ease: "power2.inOut" }, 0)
 
-        // 2. Desvanece la esfera 3D central
-        .to("#cyber-core", {
-            scale: 4,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.in"
-        }, 0)
+        // 2. Muestra el loader HUD y llena la barra
+        .to(shutterLoader, { opacity: 1, scale: 1, duration: 0.2 }, 0.3)
+        .to(loaderBar, { width: "100%", duration: 0.4 }, 0.4)
 
-        // 3. ATENÚA el spotlight al 15% (Luz ambiental tenue para iluminar la cuadrícula sin deslumbrar)
-        .to("#tactical-flashlight", {
-            opacity: 0.15,
-            duration: 0.8,
-            ease: "power2.in"
-        }, 0)
+        // 3. Oculta el loader
+        .to(shutterLoader, { opacity: 0, scale: 0.8, duration: 0.2 }, 0.8)
 
-        // 4. Muestra la tarjeta "Sobre Mí" sobre la retícula iluminada
-        .fromTo("#sobre-mi", 
-            { 
-                opacity: 0, 
-                y: 40,
-                pointerEvents: "none"
-            },
-            { 
-                opacity: 1, 
-                y: 0, 
-                pointerEvents: "auto",
-                duration: 0.6, 
-                ease: "power2.out" 
-            },
-            0.4
+        // 4. Abre las persianas para revelar Proyectos
+        .to(shutterTop, { y: "-100%", ease: "power2.inOut" }, 1.0)
+        .to(shutterBottom, { y: "100%", ease: "power2.inOut" }, 1.0)
+
+        // 5. Revelado en cascada del título y las tarjetas
+        .fromTo(sectionHeader, 
+            { opacity: 0, y: 30 }, 
+            { opacity: 1, y: 0, duration: 0.3 }, 
+            1.1
+        )
+        .fromTo(projectCards, 
+            { opacity: 0, y: 40, scale: 0.95 }, 
+            { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.4, ease: "power2.out" }, 
+            1.2
         );
 });

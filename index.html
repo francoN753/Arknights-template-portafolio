@@ -12,13 +12,37 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
 
-    <script src="js/portal-animation.js"></script>
     <title>F. Nuzzo - Portafolio</title>
 </head>
 
 <body class="no-scroll">
+
+    <div id="hud-shutters" class="hud-shutters-container">
+        <div class="shutter-panel shutter-top">
+            <div class="shutter-edge-line"></div>
+            <div class="shutter-tech-details">
+                <span>SEC_LOCK // OVERRIDE</span>
+                <span class="yellow-tag">STATUS: LOCKED</span>
+            </div>
+        </div>
+
+        <div class="shutter-loader">
+            <span class="loader-code">// SYSTEM_ACCESS_PROTOCOL</span>
+            <div class="loader-title">[ LOADING_MODULE: PROJECTS ]</div>
+            <div class="loader-bar-container">
+                <div class="loader-bar-fill"></div>
+            </div>
+        </div>
+
+        <div class="shutter-panel shutter-bottom">
+            <div class="shutter-edge-line"></div>
+            <div class="shutter-tech-details">
+                <span>SYS_MEM: 0x88F2A</span>
+                <span>READY</span>
+            </div>
+        </div>
+    </div>
 
     <div id="intro-overlay" class="intro-overlay">
         <video id="intro-video" autoplay muted playsinline preload="auto">
@@ -142,57 +166,92 @@
                 </div>
             </div>
 
-            <div id="sobre-mi" class="about-section">
-                <div class="tactical-card">
-                    <div class="card-glow"></div>
+        </section> <section id="sobre-mi" class="about-section">
+            <div class="tactical-card">
+                <div class="card-glow"></div>
 
-                    <div class="corner-crosshair top-left">+</div>
-                    <div class="corner-crosshair top-right">+</div>
-                    <div class="corner-crosshair bottom-left">+</div>
-                    <div class="corner-crosshair bottom-right">+</div>
+                <div class="corner-crosshair top-left">+</div>
+                <div class="corner-crosshair top-right">+</div>
+                <div class="corner-crosshair bottom-left">+</div>
+                <div class="corner-crosshair bottom-right">+</div>
 
-                    <div class="card-header">
-                        <span class="card-sys-id">[ PERSONNEL_FILE // 0x882 ]</span>
-                        <span class="card-title-tag">FORMULA_FN // SYS_PROFILE</span>
-                    </div>
+                <div class="card-header">
+                    <span class="card-sys-id">[ PERSONNEL_FILE // 0x882 ]</span>
+                    <span class="card-title-tag">FORMULA_FN // SYS_PROFILE</span>
+                </div>
 
-                    <div class="card-content">
-                        <span class="sub-label">DEVELOPER_PROFILE</span>
-                        <h2 class="card-main-title">SOBRE MÍ</h2>
-                        
-                        <p class="card-bio">
-                            Desarrollador Fullstack centrado en la creación de arquitecturas web tácticas, 
-                            interfaces dinámicas de alto rendimiento y soluciones de software escalables. 
-                            Enfocado en combinar lógica técnica sólida con experiencias visuales inmersivas.
-                        </p>
+                <div class="card-content">
+                    <span class="sub-label">DEVELOPER_PROFILE</span>
+                    <h2 class="card-main-title">SOBRE MÍ</h2>
+                    
+                    <p class="card-bio">
+                        Desarrollador Fullstack centrado en la creación de arquitecturas web tácticas, 
+                        interfaces dinámicas de alto rendimiento y soluciones de software escalables. 
+                        Enfocado en combinar lógica técnica sólida con experiencias visuales inmersivas.
+                    </p>
 
-                        <div class="tech-spec-grid">
-                            <div class="spec-item">
-                                <span class="spec-label">CORE_STACK</span>
-                                <span class="spec-value">TypeScript / C++ / Python</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">FRAMEWORKS</span>
-                                <span class="spec-value">Next.js / NestJS / React</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">DATABASE</span>
-                                <span class="spec-value">PostgreSQL / SQLite</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">SPECIALIZATION</span>
-                                <span class="spec-value">Software Engineering & Security</span>
-                            </div>
+                    <div class="tech-spec-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">CORE_STACK</span>
+                            <span class="spec-value">TypeScript / C++ / Python</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">FRAMEWORKS</span>
+                            <span class="spec-value">Next.js / NestJS / React</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">DATABASE</span>
+                            <span class="spec-value">PostgreSQL / SQLite</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">SPECIALIZATION</span>
+                            <span class="spec-value">Software Engineering & Security</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card-footer">
-                        <span class="footer-status"><span class="status-dot"></span> SYSTEM_ACTIVE</span>
-                        <span class="footer-code">END_FILE // 0x00_READY</span>
-                    </div>
+                <div class="card-footer">
+                    <span class="footer-status"><span class="status-dot"></span> SYSTEM_ACTIVE</span>
+                    <span class="footer-code">END_FILE // 0x00_READY</span>
                 </div>
             </div>
+        </section>
 
+        <section id="proyectos" class="projects-section">
+            <div class="projects-container">
+                
+                <div class="section-header-hud">
+                    <span class="hud-tag">// LOG_FILE_02</span>
+                    <h2 class="section-title">PROYECTOS DESTACADOS</h2>
+                    <div class="hud-header-line"></div>
+                </div>
+
+                <div class="projects-grid">
+                
+                    <article class="project-card">
+                        <div class="project-badge">SYS_01</div>
+                        <h3 class="project-title">PROYECTO ALPHA</h3>
+                        <p class="project-desc">Descripción táctica del proyecto, arquitectura utilizada e impacto del trabajo realizado.</p>
+                        <div class="project-tech">
+                            <span>GSAP</span>
+                            <span>THREE.JS</span>
+                            <span>CSS3</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-badge">SYS_02</div>
+                        <h3 class="project-title">PROYECTO BETA</h3>
+                        <p class="project-desc">Plataforma interactiva con renderizado dinámico y microinteracciones HUD.</p>
+                        <div class="project-tech">
+                            <span>REACT</span>
+                            <span>WEBGL</span>
+                            <span>TAILWIND</span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
         </section>
 
         <aside class="tactical-sidebar left-sidebar">
@@ -284,6 +343,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/cyber-core.js"></script>
     <script src="js/parallax.js"></script>
+    
     <script>
     const navToggle = document.getElementById('nav-toggle');
     const navContent = document.getElementById('nav-content');
@@ -308,6 +368,7 @@
     </script>
     <script src="js/scroll.js"></script>
     <script src="js/about-card-interaccion.js"></script>
+    <script src="js/portal-animation.js"></script>
 </body>
 
 </html>
