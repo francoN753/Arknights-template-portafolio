@@ -1,45 +1,84 @@
-// js/intro.js — Control del Video de Introducción
+// js/intro.js — Control Seguro del Video de Introducción
 
-document.addEventListener('DOMContentLoaded', () => {
-    const introOverlay = document.getElementById('intro-overlay');
-    const introVideo = document.getElementById('intro-video');
-    const skipBtn = document.getElementById('skip-intro');
+(function () {
+    function initIntro() {
+        const introOverlay = document.getElementById('intro-overlay');
+        const introVideo = document.getElementById('intro-video');
+        const skipBtn = document.getElementById('skip-intro');
 
-    if (!introOverlay || !introVideo) return;
+        const isMobile = window.matchMedia('(max-width: 900px)').matches;
 
-    let isFinished = false;
+        // --- EN MÓVIL / TABLETA (<= 900px) ---
+        if (isMobile) {
+            // Desbloquear el scroll del body inmediatamente
+            document.body.classList.remove('no-scroll');
 
-    // Función para cerrar la intro y dar paso al portafolio
-    function finishIntro() {
-        if (isFinished) return;
-        isFinished = true;
+            if (introVideo) {
+                try {
+                    introVideo.pause();
+                    introVideo.removeAttribute('src');
+                    introVideo.load();
+                } catch (e) {
+                    /* Ignorar excepciones si el video no cargó por red */
+                }
+            }
 
-        introOverlay.classList.add('is-hidden');
-        document.body.classList.remove('no-scroll');
-
-        // Pausar el video tras ocultar para liberar memoria GPU/RAM
-        setTimeout(() => {
-            introVideo.pause();
-        }, 850);
-    }
-
-    // 1. Evento al finalizar el video automáticamente
-    introVideo.addEventListener('ended', finishIntro);
-
-    // 2. Click en botón Saltar
-    if (skipBtn) {
-        skipBtn.addEventListener('click', finishIntro);
-    }
-
-    // 3. Atajos de teclado (ESC o Espacio)
-    window.addEventListener('keydown', (e) => {
-        if ((e.key === 'Escape' || e.code === 'Space') && !isFinished) {
-            finishIntro();
+            if (introOverlay) {
+                introOverlay.classList.add('is-hidden');
+                if (introOverlay.parentNode) {
+                    introOverlay.parentNode.removeChild(introOverlay);
+                }
+            }
+            return; // Finaliza la ejecución en dispositivos móviles
         }
-    });
 
-    // 4. Forzar intento de reproducción si hay políticas de autoplay
-    introVideo.play().catch(() => {
-        console.warn('Autoplay restringido por el navegador. El usuario puede omitir manualmente.');
-    });
-});
+        // --- EN ESCRITORIO (> 900px) ---
+        if (!introOverlay || !introVideo) {
+            document.body.classList.remove('no-scroll');
+            return;
+        }
+
+        let isFinished = false;
+
+        function finishIntro() {
+            if (isFinished) return;
+            isFinished = true;
+
+            introOverlay.classList.add('is-hidden');
+            document.body.classList.remove('no-scroll');
+
+            setTimeout(() => {
+                try {
+                    introVideo.pause();
+                } catch (e) {}
+            }, 850);
+        }
+
+        introVideo.addEventListener('ended', finishIntro);
+
+        if (skipBtn) {
+            skipBtn.addEventListener('click', finishIntro);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.key === 'Escape' || e.code === 'Space') && !isFinished) {
+                finishIntro();
+            }
+        });
+
+        // Intentar reproducción automática
+        const playPromise = introVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                console.warn('Autoplay bloqueado por el navegador.');
+            });
+        }
+    }
+
+    // Ejecución inmediata si el DOM ya se encuentra listo (evita congelamientos por caché)
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        initIntro();
+    } else {
+        document.addEventListener('DOMContentLoaded', initIntro);
+    }
+})();

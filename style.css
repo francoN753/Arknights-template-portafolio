@@ -126,6 +126,27 @@ html, body {
    NAVBAR RESPONSIVE (< 900px)
    ========================================== */
 @media (max-width: 900px) {
+
+  /* 1. Ocultar y deshabilitar completamente el overlay y el video */
+  #intro-overlay,
+  .intro-overlay,
+  #intro-video {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
+  /* 2. Forzar scroll libre en el body sin importar qué diga JavaScript */
+  html, 
+  body, 
+  body.no-scroll {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    position: static !important;
+  }
+
     .navbar {
         display: flex;
         justify-content: space-between;
@@ -227,6 +248,12 @@ html, body {
         padding-top: 0;
         gap: 1rem;
     }
+
+    /* Desactivar el Overlay de la Intro en móvil/tableta */
+  #intro-overlay,
+  .intro-overlay {
+    display: none !important;
+  }
 }
 
 /* Ocultar elementos de escritorio y activar versión móvil antes de los 900px */
@@ -1080,4 +1107,22 @@ body.no-scroll {
 /* Evita desbordamiento si las capas se desplazan hacia los extremos */
 .hero-section {
   overflow: hidden;
+}
+
+/* ==========================================
+   GARANTÍA RESPONSIVE MOBILE (< 900px)
+   ========================================== */
+@media (max-width: 900px) {
+
+  
+
+  /* 2. Forzar scroll libre en el body sin importar qué diga JavaScript */
+  html, 
+  body, 
+  body.no-scroll {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    position: static !important;
+  }
 }
