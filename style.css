@@ -1,4 +1,4 @@
-/*style.css*/
+/* style.css — Hoja de Estilos Principal (Optimizado) */
 
 /* ==========================================
    0. IMPORTAR FUENTE LOCAL (ZELDA BOTW)
@@ -11,9 +11,8 @@
 }
 
 /* ==========================================
-   1. RESET Y VARIABLES (SISTEMA DE DISEÑO)
+   1. RESET, VARIABLES Y COMPATIBILIDAD LENIS
    ========================================== */
-
 :root {
   --bg-main: #070707;
   --accent-yellow: #F8F546;
@@ -36,18 +35,34 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: var(--bg-main);
   color: var(--text-light);
   font-family: var(--font-body);
   overflow-x: hidden;
 }
 
+/* Ajustes recomendados para Lenis Smooth Scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 
 /* ==========================================
-   2. BARRA DE NAVEGACIÓN
+   2. BARRA DE NAVEGACIÓN (DESKTOP)
    ========================================== */
-
 .navbar {
   position: fixed;
   top: 0;
@@ -57,7 +72,7 @@ html, body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
   mix-blend-mode: difference;
 }
 
@@ -69,10 +84,24 @@ html, body {
 
 .nav-left {
   justify-content: flex-start;
+  order: 1;
+}
+
+.nav-logo {
+  order: 2;
 }
 
 .nav-right {
   justify-content: flex-end;
+  order: 3;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-content {
+  display: contents;
 }
 
 .navbar a {
@@ -106,173 +135,10 @@ html, body {
   color: var(--accent-olive);
 }
 
-/* ==========================================
-   MANTENER GRID EN ESCRITORIO (> 900px)
-   ========================================== */
-.nav-toggle {
-    display: none;
-}
-
-.nav-content {
-    display: contents; /* Desmonta el contenedor para que la grilla del navbar funcione directo */
-}
-
-.nav-left { order: 1; }
-.nav-logo { order: 2; }
-.nav-right { order: 3; }
-
 
 /* ==========================================
-   NAVBAR RESPONSIVE (< 900px)
+   3. SECCIÓN HERO & TRANSICIÓN PORTAL (GSAP)
    ========================================== */
-@media (max-width: 900px) {
-
-  /* 1. Ocultar y deshabilitar completamente el overlay y el video */
-  #intro-overlay,
-  .intro-overlay,
-  #intro-video {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-  
-  /* 2. Forzar scroll libre en el body sin importar qué diga JavaScript */
-  html, 
-  body, 
-  body.no-scroll {
-    overflow: auto !important;
-    overflow-x: hidden !important;
-    height: auto !important;
-    position: static !important;
-  }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.2rem 1.5rem;
-        mix-blend-mode: normal;
-        z-index: 1000;
-    }
-
-    .nav-logo {
-        font-size: 1.4rem;
-        z-index: 1001;
-    }
-
-    /* Botón Táctico de Menú */
-    .nav-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #070707;
-        border: 1px solid var(--accent-yellow);
-        color: var(--accent-yellow);
-        font-family: var(--font-heading);
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        padding: 0.5rem 0.9rem;
-        cursor: pointer;
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
-        transition: all 0.25s ease;
-        z-index: 1001;
-    }
-
-    .nav-toggle:hover {
-        background-color: var(--accent-yellow);
-        color: #000000;
-    }
-
-    /* Menú desplegable a pantalla completa */
-    .nav-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2.5rem;
-        position: fixed;
-        inset: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(7, 7, 7, 0.95);
-        backdrop-filter: blur(10px);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .nav-content.is-open {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-    }
-
-    .nav-group {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .navbar a {
-        font-size: 1.1rem;
-        letter-spacing: 0.2em;
-    }
-
-    /* Línea divisora entre grupos de links */
-    .nav-left::after {
-        content: '';
-        width: 50px;
-        height: 1px;
-        background-color: var(--accent-yellow);
-        opacity: 0.3;
-        margin-top: 1rem;
-    }
-
-    /* 1. Ocultar el título (NUZZO + Marquee) a menos de 900px */
-    .hero-title-wrapper {
-        display: none !important;
-    }
-
-    /* 2. Ocultar el texto "Desplázate para explorar" */
-    .hero-footer-info {
-        display: none !important;
-    }
-
-    /* 3. Reajustar el contenido central */
-    .hero-content {
-        justify-content: center;
-        padding-top: 0;
-        gap: 1rem;
-    }
-
-    /* Desactivar el Overlay de la Intro en móvil/tableta */
-  #intro-overlay,
-  .intro-overlay {
-    display: none !important;
-  }
-}
-
-/* Ocultar elementos de escritorio y activar versión móvil antes de los 900px */
-@media (max-width: 1024px) {
-    .desktop-nav, 
-    .nav-links {
-        display: none !important;
-    }
-
-    .mobile-menu-btn {
-        display: flex !important;
-    }
-}
-
-
-/* ==========================================
-   3. SECCIÓN HERO (ESTRUCTURA Y MARCO)
-   ========================================== */
-
 .hero-section {
   position: relative;
   width: 100%;
@@ -281,12 +147,12 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
   padding: 8rem 4rem 4rem 4rem;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .hero-content {
   position: relative;
-  z-index: 3;
+  z-index: 10;
   width: 100%;
   height: 100%;
   display: flex;
@@ -307,11 +173,85 @@ html, body {
   font-weight: 600;
 }
 
+/* Wrapper del título alineado con Marquee */
+.hero-title-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+.marquee-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.07;
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.marquee-track span {
+  font-family: var(--font-heading);
+  font-size: 4vw;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hero-footer-info {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.75;
+  margin-top: auto;
+}
+
 
 /* ==========================================
-   4. FONDO TÁCTICO // ARKNIGHTS ENDFIELD HUD
+   4. SECCIÓN "SOBRE MÍ" (DESTINO DEL PORTAL)
    ========================================== */
+.about-section {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  padding: 6rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  will-change: transform, opacity, filter;
+}
 
+
+/* ==========================================
+   5. FONDO TÁCTICO // ARKNIGHTS ENDFIELD HUD
+   ========================================== */
 .tactical-bg {
   position: fixed;
   inset: 0;
@@ -322,7 +262,6 @@ html, body {
   user-select: none;
 }
 
-/* Malla de puntos fina */
 .bg-dots-grid {
   position: absolute;
   inset: 0;
@@ -331,7 +270,6 @@ html, body {
   mask-image: radial-gradient(circle at center, black 50%, transparent 90%);
 }
 
-/* Capa SVG vectorial */
 .hud-svg {
   position: absolute;
   inset: 0;
@@ -339,7 +277,6 @@ html, body {
   height: 100%;
 }
 
-/* Formas geométricas tácticas */
 .geo-shape {
   position: absolute;
   pointer-events: none;
@@ -366,7 +303,6 @@ html, body {
   background: rgba(255, 255, 255, 0.015);
 }
 
-/* Etiquetas de datos tácticos */
 .hud-callout {
   position: absolute;
   font-family: var(--font-heading), monospace;
@@ -402,7 +338,6 @@ html, body {
   padding-right: 0.8rem;
 }
 
-/* Ubicación corregida más arriba para dar espacio */
 .callout-bottom-left {
   bottom: 15%;
   left: 4%;
@@ -430,11 +365,48 @@ html, body {
   color: rgba(255, 255, 255, 0.2);
 }
 
+#cyber-core {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: screen;
+}
+
+#tactical-flashlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(
+    550px circle at var(--light-x, 50%) var(--light-y, 50%),
+    rgba(204, 255, 0, 0.12) 0%,
+    rgba(0, 255, 204, 0.04) 40%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  will-change: background;
+}
+
+/* Optimización de hardware Parallax */
+.tactical-bg,
+.marquee-bg,
+#glitch-title,
+.hero-tagline {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
 
 /* ==========================================
-   5. TIPOGRAFÍA Y LETRAS NUZZO
+   6. TIPOGRAFÍA Y LETRAS NUZZO (ZOOM OPTIMIZED)
    ========================================== */
-
 .hero-title {
   font-family: var(--font-display);
   font-size: 30vw;
@@ -442,15 +414,17 @@ html, body {
   line-height: 0.7;
   color: var(--text-light);
   user-select: none;
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  transform-origin: center center;
+  backface-visibility: hidden;
   perspective: 1200px;
   transform-style: preserve-3d;
   position: relative;
   z-index: 1;
+  display: inline-block; /* O 'block'. ¡Crucial para que GSAP pueda transformarlo! */
+  transform-origin: center center;
+  will-change: transform;
 }
 
 .hero-title .char {
@@ -461,15 +435,17 @@ html, body {
   pointer-events: auto;
   transition: transform 0.15s ease-out, color 0.3s ease, text-shadow 0.3s ease;
   will-change: transform;
-  transform-origin: center center;
+  transform-origin: center center !important;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   line-height: 0.75;
   height: 0.75em;
   width: 0.48em; 
   overflow: visible; 
   text-align: center;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Animación de entrada: empieza amarillo */
 .hero-title .char.char-intro {
   color: var(--accent-yellow);
   text-shadow: 0 0 20px rgba(248, 245, 70, 0.5), 0 0 40px rgba(248, 245, 70, 0.2);
@@ -480,73 +456,10 @@ html, body {
   text-shadow: 0 0 15px rgba(248, 245, 70, 0.7), 0 0 30px rgba(248, 245, 70, 0.3);
 }
 
-/* Footer de la portada */
-.hero-footer-info {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0.75;
-  margin-top: auto;
-}
-
-/* Wrapper del título con marquee */
-.hero-title-wrapper {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 1.5rem 0;
-}
-
-.marquee-bg {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.07;
-}
-
-.marquee-track {
-  display: flex;
-  white-space: nowrap;
-  animation: marquee-scroll 20s linear infinite;
-}
-
-.marquee-track span {
-  font-family: var(--font-heading);
-  font-size: 4vw;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-light);
-  flex-shrink: 0;
-}
-
-@keyframes marquee-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 
 /* ==========================================
-   6. CURSOR HUD Y SIDEBAR IZQUIERDA
+   7. CURSOR HUD Y SIDEBAR IZQUIERDA
    ========================================== */
-
 #hero, #hero * {
   cursor: none !important;
 }
@@ -616,7 +529,6 @@ html, body {
   margin-left: 4px;
 }
 
-/* Sidebar táctica */
 .tactical-sidebar {
   position: fixed;
   top: 50%;
@@ -729,20 +641,17 @@ html, body {
 
 
 /* ==========================================
-   7. RECUADRO AMARILLO CORREGIDO (BADGE)
+   8. BADGE DE DISPONIBILIDAD & DATAMATRIX
    ========================================== */
-
 button.availability-badge-bottom {
   position: fixed;
   bottom: 2.5rem;
   right: 3rem;
   z-index: 100;
-  
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   padding: 0.65rem 1.25rem;
-  
   background-color: var(--accent-yellow);
   color: #000000;
   font-family: var(--font-heading), monospace;
@@ -753,8 +662,6 @@ button.availability-badge-bottom {
   border: none;
   outline: none;
   cursor: pointer;
-  
-  /* Corte táctico elegante en la esquina inferior derecha */
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
   box-shadow: 0 4px 15px rgba(248, 245, 70, 0.3);
   transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
@@ -767,7 +674,6 @@ button.availability-badge-bottom:hover {
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.5);
 }
 
-/* Viñeta negra holgada */
 .availability-badge-bottom .badge-corner {
   width: 6px;
   height: 6px;
@@ -780,7 +686,6 @@ button.availability-badge-bottom:hover {
   white-space: nowrap;
 }
 
-/* Data Matrix Código de barras */
 .datamatrix-corner-block {
   position: fixed;
   bottom: 2.2rem;
@@ -833,19 +738,10 @@ button.availability-badge-bottom:hover {
   font-weight: 600;
 }
 
-@media (max-width: 1200px) {
-  .datamatrix-corner-block {
-    bottom: 5.5rem;
-    right: 3rem;
-    align-items: flex-end;
-  }
-}
-
 
 /* ==========================================
-   8. MODAL / TARJETA EXPANSIBLE DE CONTACTO
+   9. MODAL / TARJETA EXPANSIBLE DE CONTACTO
    ========================================== */
-
 .contact-modal {
   position: fixed;
   inset: 0;
@@ -992,131 +888,101 @@ button.availability-badge-bottom:hover {
   box-shadow: 0 0 6px var(--accent-yellow);
 }
 
-/* ==========================================
-   9. INTRO VIDEO OVERLAY
-   ========================================== */
 
+/* ==========================================
+   10. INTRO VIDEO OVERLAY
+   ========================================== */
 body.no-scroll {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 .intro-overlay {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10000;
-    background-color: var(--bg-main);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.intro-overlay.is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.intro-overlay video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Botón Omitir Intro */
-.skip-intro-btn {
-    position: absolute;
-    bottom: 2.5rem;
-    right: 3rem;
-    z-index: 10001;
-    background-color: rgba(7, 7, 7, 0.75);
-    border: 1px solid var(--accent-yellow);
-    color: var(--accent-yellow);
-    font-family: var(--font-heading), monospace;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 0.6rem 1.2rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    backdrop-filter: blur(5px);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
-    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.skip-intro-btn:hover {
-    background-color: var(--accent-yellow);
-    color: #000000;
-    box-shadow: 0 0 20px rgba(248, 245, 70, 0.4);
-    transform: translateY(-2px);
-}
-
-#cyber-core {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Permite hacer clic en los elementos detrás o encima */
-  z-index: 1;           /* Queda justo detrás del contenido principal */
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background-color: var(--bg-main);
   display: flex;
   align-items: center;
   justify-content: center;
-  mix-blend-mode: screen;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Asegura que tu contenido esté por encima del canvas 3D */
-.hero-content {
-  position: relative;
-  z-index: 10;
+.intro-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-#tactical-flashlight {
+.intro-overlay video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skip-intro-btn {
   position: absolute;
-  inset: 0;
-  pointer-events: none; /* No bloquea clics ni interacciones */
-  z-index: 2;           /* Detrás del texto NUZZO (z-index: 10), por encima del fondo */
-  
-  /* Degradado radial reactivo guiado por variables CSS */
-  background: radial-gradient(
-    550px circle at var(--light-x, 50%) var(--light-y, 50%),
-    rgba(204, 255, 0, 0.12) 0%,   /* Centro amarillo neón muy suave */
-    rgba(0, 255, 204, 0.04) 40%,  /* Borde leve verde cian táctico */
-    transparent 70%               /* Desvanecimiento total */
-  );
-  mix-blend-mode: screen;
-  will-change: background;
+  bottom: 2.5rem;
+  right: 3rem;
+  z-index: 10001;
+  background-color: rgba(7, 7, 7, 0.75);
+  border: 1px solid var(--accent-yellow);
+  color: var(--accent-yellow);
+  font-family: var(--font-heading), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  backdrop-filter: blur(5px);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Optimización de hardware para las capas del Parallax */
-.tactical-bg,
-.marquee-bg,
-#glitch-title,
-.hero-tagline {
-  will-change: transform;
-  transition: transform 0.1s ease-out; /* Suaviza microrsaltos al mover el mouse */
+.skip-intro-btn:hover {
+  background-color: var(--accent-yellow);
+  color: #000000;
+  box-shadow: 0 0 20px rgba(248, 245, 70, 0.4);
+  transform: translateY(-2px);
 }
 
-/* Evita desbordamiento si las capas se desplazan hacia los extremos */
-.hero-section {
-  overflow: hidden;
-}
 
 /* ==========================================
-   GARANTÍA RESPONSIVE MOBILE (< 900px)
+   11. MEDIA QUERIES (RESPONSIVE CONSOLIDADO)
    ========================================== */
+
+/* Ajustes para tabletas medianas */
+@media (max-width: 1200px) {
+  .datamatrix-corner-block {
+    bottom: 5.5rem;
+    right: 3rem;
+    align-items: flex-end;
+  }
+}
+
+/* Ocultar elementos de escritorio grandes antes de 900px */
+@media (max-width: 1024px) {
+  .desktop-nav, 
+  .nav-links {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+/* --- VISTA MÓVIL Y TABLETAS CANÓNICA (< 900px) --- */
 @media (max-width: 900px) {
 
-  
-
-  /* 2. Forzar scroll libre en el body sin importar qué diga JavaScript */
+  /* 1. Garantía total contra congelamientos de scroll en móvil */
   html, 
   body, 
   body.no-scroll {
@@ -1125,4 +991,114 @@ body.no-scroll {
     height: auto !important;
     position: static !important;
   }
+
+  /* 2. Ocultar video de intro e overlays en móviles */
+  #intro-overlay,
+  .intro-overlay,
+  #intro-video {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* 3. Reorganización de Navbar Móvil */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    mix-blend-mode: normal;
+    z-index: 1000;
+  }
+
+  .nav-logo {
+    font-size: 1.4rem;
+    z-index: 1001;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #070707;
+    border: 1px solid var(--accent-yellow);
+    color: var(--accent-yellow);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+    transition: all 0.25s ease;
+    z-index: 1001;
+  }
+
+  .nav-toggle:hover {
+    background-color: var(--accent-yellow);
+    color: #000000;
+  }
+
+  .nav-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(7, 7, 7, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .nav-content.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .navbar a {
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+  }
+
+  .nav-left::after {
+    content: '';
+    width: 50px;
+    height: 1px;
+    background-color: var(--accent-yellow);
+    opacity: 0.3;
+    margin-top: 1rem;
+  }
+
+  /* 4. Ocultar elementos pesados/extensos en Hero Móvil */
+  .hero-title-wrapper,
+  .hero-footer-info {
+    display: none !important;
+  }
+
+  .hero-content {
+    justify-content: center;
+    padding-top: 0;
+    gap: 1rem;
+  }
+}
+
+#cyber-core {
+    transform-origin: center center !important;
+    will-change: transform, opacity;
 }
