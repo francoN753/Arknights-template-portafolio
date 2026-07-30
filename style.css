@@ -2060,4 +2060,32 @@ body.no-scroll {
     font-size: 0.68rem !important;
     letter-spacing: 0.5px !important;
   }
+
+/* 1. Desactivar y ocultar el cursor HUD por completo */
+  #hud-cursor,
+  .hud-cursor {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* 2. Eliminar el recuadro/sombra de toque por defecto de los navegadores móviles */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+/* Ocultar y desactivar la linterna/spotlight */
+  #tactical-flashlight,
+  .spotlight-overlay,
+  .spotlight {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+}
+
+#hud-shutters {
+  display: none !important;
 }
