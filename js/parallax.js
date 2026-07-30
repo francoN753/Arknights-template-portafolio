@@ -13,8 +13,8 @@ function initTacticalParallax() {
   let currentX = 0;
   let currentY = 0;
 
-  const windowHalfX = window.innerWidth / 2;
-  const windowHalfY = window.innerHeight / 2;
+  let windowHalfX = window.innerWidth / 2;
+  let windowHalfY = window.innerHeight / 2;
 
   // Escuchar el movimiento del mouse
   window.addEventListener('mousemove', (e) => {
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (specItems.length) gsap.set(specItems, { opacity: 0, y: 15 });
     if (cardFooter) gsap.set(cardFooter, { opacity: 0, y: 8 });
 
-    // Timeline Principal
+    // Timeline Principal Hero → Sobre Mí
     const breachTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#hero",
@@ -114,30 +114,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ═══════════════════════════════════════════════════════════
-    // FASE 1: DESVANECIMIENTO TOTAL DE TODO EL HUD Y ELEMENTOS DE HERO
+    // FASE 1: DESVANECIMIENTO DE ELEMENTOS INTERNOS DEL HERO
     // ═══════════════════════════════════════════════════════════
 
-    // Seleccionamos absolutamente TODOS los elementos decorativos, textos laterales y paneles del Hero
     const allHeroElements = document.querySelectorAll(`
         #tactical-flashlight,
-        .tactical-bg,
         .marquee-bg,
         .hero-title-wrapper,
         .hero-tagline,
         .hero-footer-info,
         .hero-footer,
-        .hud-callout,
-        .hud-callouts,
-        .hud-left,
-        .hud-right,
-        .hud-corners,
-        .hud-decor,
-        .barcode,
         #cyber-core,
         #hero > *:not(.about-section):not(#sobre-mi)
     `);
 
-    // Al rotar la rueda un milímetro (t = 0), todo el escenario exterior se desvanece de inmediato
     breachTl.to(allHeroElements, {
         opacity: 0,
         duration: 0.05,
@@ -182,4 +172,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 0.68);
     }
     if (cardFooter) breachTl.to(cardFooter, { opacity: 1, y: 0, duration: 0.15 }, 0.8);
+
+    // ═══════════════════════════════════════════════════════════
+    // FASE 3: ELIMINACIÓN / DESVANECIMIENTO DE ELEMENTOS FLOTANTES
+    // AL SUPERAR LA SECCIÓN "SOBRE MÍ"
+    // ═══════════════════════════════════════════════════════════
+
+    const floatingHudElements = document.querySelectorAll(`
+        .left-sidebar,
+        .datamatrix-corner-block,
+        .hud-callout,
+        .hud-callouts,
+        .tactical-bg,
+        .availability-badge-bottom
+    `);
+
+    if (floatingHudElements.length) {
+        gsap.to(floatingHudElements, {
+            scrollTrigger: {
+                trigger: "#sobre-mi",
+                start: "bottom 80%",   // Inicia el desvanecimiento cuando la parte inferior de Sobre Mí asoma
+                end: "bottom 30%",     // Oculto al 100% antes de entrar a Proyectos
+                scrub: 0.5
+            },
+            opacity: 0,
+            y: -20,
+            pointerEvents: "none",
+            ease: "power1.out"
+        });
+    }
 });

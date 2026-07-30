@@ -1208,6 +1208,12 @@ body.no-scroll {
     position: static !important;
   }
 
+  /* 2. Reducir padding global de la sección Hero */
+  #hero {
+    padding: 1.5rem 1rem !important;
+  }
+
+
   #intro-overlay,
   .intro-overlay,
   #intro-video {
@@ -1227,7 +1233,7 @@ body.no-scroll {
   }
 
   .nav-logo {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     z-index: 1001;
   }
 

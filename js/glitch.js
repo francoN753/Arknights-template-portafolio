@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ═══════════════════════════════════════
     chars.forEach(char => char.classList.add('char-intro'));
 
-    const INTRO_DELAY = 2000;   // ms antes de empezar la transición
+    const INTRO_DELAY = 150;   // ms antes de empezar la transición
     const STAGGER = 80;        // ms entre cada letra
 
     setTimeout(() => {
