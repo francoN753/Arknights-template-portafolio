@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (specItems.length) gsap.set(specItems, { opacity: 0, y: 15 });
     if (cardFooter) gsap.set(cardFooter, { opacity: 0, y: 8 });
 
-    // Timeline Principal Hero → Sobre Mí
+    // Timeline Principal Hero -> Sobre Mí
     const breachTl = gsap.timeline({
         scrollTrigger: {
             trigger: "#hero",
@@ -114,10 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ═══════════════════════════════════════════════════════════
-    // FASE 1: DESVANECIMIENTO DE ELEMENTOS INTERNOS DEL HERO
+    // FASE 1: DESVANECIMIENTO INMEDIATO DE ELEMENTOS HERO Y HUD FLOTANTE
+    // (Ocurre ANTES de que la tarjeta de Sobre Mí aparezca)
     // ═══════════════════════════════════════════════════════════
 
-    const allHeroElements = document.querySelectorAll(`
+    const elementsToFadeBeforeAbout = document.querySelectorAll(`
         #tactical-flashlight,
         .marquee-bg,
         .hero-title-wrapper,
@@ -125,17 +126,27 @@ document.addEventListener("DOMContentLoaded", () => {
         .hero-footer-info,
         .hero-footer,
         #cyber-core,
-        #hero > *:not(.about-section):not(#sobre-mi)
+        .left-sidebar,
+        .datamatrix-corner-block,
+        .hud-callout,
+        .hud-callouts,
+        .hud-corners,
+        .hud-decor,
+        .availability-badge-bottom
     `);
 
-    breachTl.to(allHeroElements, {
+    // Tan pronto como se inicia el scroll (t = 0 a t = 0.25), todo el HUD flotante se oculta
+    breachTl.to(elementsToFadeBeforeAbout, {
         opacity: 0,
-        duration: 0.05,
+        y: -15,
+        pointerEvents: "none",
+        duration: 0.25,
         ease: "power1.out"
     }, 0);
 
     // ═══════════════════════════════════════════════════════════
-    // FASE 2: ENTRADA LIMPIA DE LA TARJETA "CONTRACT / SOBRE MÍ"
+    // FASE 2: ENTRADA LIMPIA DE LA TARJETA "SOBRE MÍ"
+    // (Se activa a partir de t = 0.35, cuando la pantalla ya está despejada)
     // ═══════════════════════════════════════════════════════════
 
     if (tacticalCard) {
@@ -172,33 +183,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 0.68);
     }
     if (cardFooter) breachTl.to(cardFooter, { opacity: 1, y: 0, duration: 0.15 }, 0.8);
-
-    // ═══════════════════════════════════════════════════════════
-    // FASE 3: ELIMINACIÓN / DESVANECIMIENTO DE ELEMENTOS FLOTANTES
-    // AL SUPERAR LA SECCIÓN "SOBRE MÍ"
-    // ═══════════════════════════════════════════════════════════
-
-    const floatingHudElements = document.querySelectorAll(`
-        .left-sidebar,
-        .datamatrix-corner-block,
-        .hud-callout,
-        .hud-callouts,
-        .tactical-bg,
-        .availability-badge-bottom
-    `);
-
-    if (floatingHudElements.length) {
-        gsap.to(floatingHudElements, {
-            scrollTrigger: {
-                trigger: "#sobre-mi",
-                start: "bottom 80%",   // Inicia el desvanecimiento cuando la parte inferior de Sobre Mí asoma
-                end: "bottom 30%",     // Oculto al 100% antes de entrar a Proyectos
-                scrub: 0.5
-            },
-            opacity: 0,
-            y: -20,
-            pointerEvents: "none",
-            ease: "power1.out"
-        });
-    }
 });

@@ -2034,3 +2034,30 @@ body.no-scroll {
     align-items: flex-start;
   }
 }
+
+/* ==========================================
+   AJUSTE DE NAVBAR PARA MÓVIL (<= 768px)
+   ========================================== */
+@media (max-width: 768px) {
+  /* 1. Reducir el padding de la barra superior */
+  .navbar {
+    padding: 0.8rem 1.2rem !important;
+  }
+
+  /* 2. Logo más pequeño y delicado */
+  .nav-logo {
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* 3. Botón de menú más reducido y elegante */
+  .nav-toggle {
+    padding: 0.35rem 0.6rem !important;
+    border-width: 1px !important;
+  }
+
+  .nav-toggle .toggle-text {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.5px !important;
+  }
+}
