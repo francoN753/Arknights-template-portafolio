@@ -1,0 +1,19 @@
+LICENCIA DE USO — Arknights-template-portfolio
+
+Copyright (c) 2026 FORMULA_FN
+
+1. LICENCIA PERSONAL / NO COMERCIAL (GRATUITA)
+Se concede permiso gratuito para usar, copiar y modificar este software únicamente para:
+- Proyectos personales o portafolios individuales.
+- Proyectos académicos, educativos y de aprendizaje.
+- Organizaciones sin fines de lucro.
+
+2. LICENCIA COMERCIAL (REQUIERE PAGO)
+Queda estrictamente prohibido el uso parcial o total de este proyecto para:
+- Sitios web de empresas o negocios.
+- Proyectos desarrollados para clientes finales de forma remunerada.
+- Integración en productos comerciales o plataformas de pago.
+
+Para adquirir una Licencia Comercial oficial, escribe al siguiente correo: franconuzzon2007@gmail.com
+
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO.
