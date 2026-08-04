@@ -20,3 +20,18 @@ if (typeof ScrollTrigger !== 'undefined') {
   }
   requestAnimationFrame(raf);
 }
+
+// Lógica del botón REBOOT_SYSTEM (Ir Arriba)
+document.addEventListener('DOMContentLoaded', () => {
+  const btnReboot = document.getElementById('btn-reboot');
+  if (btnReboot) {
+    btnReboot.addEventListener('click', () => {
+      // Usar lenis para un scroll suave, o fallback a window.scrollTo si falla
+      if (typeof lenis !== 'undefined') {
+        lenis.scrollTo(0, { duration: 1.5 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+});
