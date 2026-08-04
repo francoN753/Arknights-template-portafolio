@@ -1035,7 +1035,7 @@ body.no-scroll {
 .tactical-card {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 980px;
   /* 1. Fondo más oscuro y opaco (aumentado de 0.5 a 0.88) */
   background: rgba(7, 8, 11, 0.88) !important; 
   /* 2. Desenfoque más denso para tapar las líneas del fondo */
@@ -1046,6 +1046,7 @@ body.no-scroll {
   padding: 2rem;
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
 }
 
 .card-glow {
@@ -1173,6 +1174,177 @@ body.no-scroll {
   background-color: #f8f546;
   border-radius: 50%;
   box-shadow: 0 0 8px #f8f546;
+}
+
+
+/* ==========================================
+   11b. LAYOUT DOS COLUMNAS — FOTO DE PERFIL
+   ========================================== */
+
+/* Contenedor principal del cuerpo de la tarjeta */
+.card-body-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+/* Columna izquierda: el texto */
+.card-text-col {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Columna derecha: la foto */
+.card-profile-col {
+  flex: 0 0 220px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Marco táctico para la foto */
+.profile-frame {
+  position: relative;
+  width: 220px;
+  height: 260px;
+  flex-shrink: 0;
+  border: 1px solid rgba(248, 245, 70, 0.25);
+  background: rgba(248, 245, 70, 0.03);
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+/* Foto dentro del marco */
+.profile-photo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 280px;
+  object-fit: cover;
+  /* 0% en X = borde superior del display (cabeza arriba).
+     Y% controla el eje horizontal tras rotar: 70% mueve la cara hacia la derecha */
+  object-position: 0% 70%;
+  display: block;
+  transform: translate(-50%, -50%) rotate(90deg);
+  filter: grayscale(20%) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+
+.profile-frame:hover .profile-photo {
+  filter: grayscale(0%) contrast(1.1);
+}
+
+/* ── Láser de escaneo HUD ── */
+.profile-laser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(248, 245, 70, 0.12) 20%,
+    rgba(248, 245, 70, 0.45) 50%,
+    rgba(248, 245, 70, 0.12) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 6px rgba(248, 245, 70, 0.3), 0 0 14px rgba(248, 245, 70, 0.1);
+  animation: laser-scan 3s ease-in-out infinite;
+}
+
+@keyframes laser-scan {
+  0%   { top: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Esquinas del marco tipo HUD */
+.profile-frame-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.pf-tl {
+  top: 4px; left: 4px;
+  border-top: 2px solid #f8f546;
+  border-left: 2px solid #f8f546;
+}
+
+.pf-tr {
+  top: 4px; right: 4px;
+  border-top: 2px solid #f8f546;
+  border-right: 2px solid #f8f546;
+}
+
+.pf-bl {
+  bottom: 4px; left: 4px;
+  border-bottom: 2px solid #f8f546;
+  border-left: 2px solid #f8f546;
+}
+
+.pf-br {
+  bottom: 4px; right: 4px;
+  border-bottom: 2px solid #f8f546;
+  border-right: 2px solid #f8f546;
+}
+
+/* Efecto scanlines sobre la foto */
+.profile-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.18) 3px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  pointer-events: none;
+}
+
+/* Etiqueta HUD en la parte inferior */
+.profile-hud-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  padding: 0.35rem 0.6rem;
+  background: rgba(7, 8, 11, 0.82);
+  border-top: 1px solid rgba(248, 245, 70, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+/* Punto de estado verde en la etiqueta */
+.profile-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 6px #4ade80;
+  flex-shrink: 0;
+  animation: profile-dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes profile-dot-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #4ade80; }
+  50% { opacity: 0.5; box-shadow: 0 0 2px #4ade80; }
 }
 
 
@@ -1618,6 +1790,63 @@ body.no-scroll {
   box-shadow: 0 10px 30px rgba(248, 245, 70, 0.15);
 }
 
+.project-img-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+  filter: grayscale(40%) contrast(1.1);
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.05);
+  filter: grayscale(0%) contrast(1.1);
+}
+
+.project-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(7, 8, 11, 0.8) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.project-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-actions {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-github {
+  display: inline-block;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.75rem;
+  color: var(--accent-yellow, #f8f546);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.btn-github:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(248, 245, 70, 0.6);
+}
+
 .project-badge {
   font-family: var(--font-heading, sans-serif);
   font-size: 0.6rem;
@@ -1660,6 +1889,32 @@ body.no-scroll {
 /* Espaciado para la lectura de la tarjeta Sobre Mí */
 .about-section {
   padding-bottom: 12vh;
+}
+
+/* Responsive: stack en columna en tablets/móviles */
+@media (max-width: 768px) {
+  .card-body-layout {
+    flex-direction: column-reverse;
+    gap: 1.75rem;
+  }
+
+  .card-profile-col {
+    flex: none;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .profile-frame {
+    width: 180px;
+    height: 210px;
+  }
+}
+
+@media (max-width: 500px) {
+  .profile-frame {
+    width: 150px;
+    height: 175px;
+  }
 }
 
 .projects-section {
@@ -2088,4 +2343,28 @@ body.no-scroll {
 
 #hud-shutters {
   display: none !important;
+}
+
+/* ==========================================
+   BADGE DE DISPONIBILIDAD (HERO)
+   ========================================== */
+.hero-availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light, #F4F5F5);
+  background: rgba(101, 113, 54, 0.15);
+  border: 1px solid rgba(101, 113, 54, 0.4);
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.hero-availability-badge .status-text {
+  font-weight: 600;
+  color: #a3e635; /* Verde neón táctico */
 }
