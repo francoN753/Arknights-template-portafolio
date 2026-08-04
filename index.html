@@ -180,30 +180,59 @@
                 </div>
 
                 <div class="card-content">
-                    <span class="sub-label">DEVELOPER_PROFILE</span>
-                    <h2 class="card-main-title">SOBRE MÍ</h2>
-                    
-                    <p class="card-bio">
-                        Soy ingeniero en informatica y desarrollador full stack con experiencia en la creación de aplicaciones web y sistemas escalables. Mi enfoque está en la implementación de tácticas y patrones arquitectónicos, buscando siempre optimizar el rendimiento y la eficiencia de los sistemas que desarrollo.
-                    </p>
+                    <div class="card-body-layout">
 
-                    <div class="tech-spec-grid">
-                        <div class="spec-item">
-                            <span class="spec-label">CORE_STACK</span>
-                            <span class="spec-value">TypeScript / C++ / Python / Java</span>
+                        <!-- Columna izquierda: texto -->
+                        <div class="card-text-col">
+                            <span class="sub-label">DEVELOPER_PROFILE</span>
+                            <h2 class="card-main-title">SOBRE MÍ</h2>
+                            
+                            <p class="card-bio">
+                                Soy ingeniero en informatica y desarrollador full stack con experiencia en la creación de aplicaciones web y sistemas escalables. Mi enfoque está en la implementación de tácticas y patrones arquitectónicos, buscando siempre optimizar el rendimiento y la eficiencia de los sistemas que desarrollo.
+                            </p>
+
+                            <div class="tech-spec-grid">
+                                <div class="spec-item">
+                                    <span class="spec-label">CORE_STACK</span>
+                                    <span class="spec-value">TypeScript / C++ / Python / Java</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">FRAMEWORKS</span>
+                                    <span class="spec-value">Next.js / NestJS / React / typeORM</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">DATABASE</span>
+                                    <span class="spec-value">PostgreSQL / SQLite</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">SPECIALIZATION</span>
+                                    <span class="spec-value">Software Engineering</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="spec-item">
-                            <span class="spec-label">FRAMEWORKS</span>
-                            <span class="spec-value">Next.js / NestJS / React/ typeORM</span>
+
+                        <!-- Columna derecha: foto de perfil -->
+                        <div class="card-profile-col">
+                            <div class="profile-frame">
+                                <div class="profile-frame-corner pf-tl"></div>
+                                <div class="profile-frame-corner pf-tr"></div>
+                                <div class="profile-frame-corner pf-bl"></div>
+                                <div class="profile-frame-corner pf-br"></div>
+                                <div class="profile-scanlines" aria-hidden="true"></div>
+                                <div class="profile-laser" aria-hidden="true"></div>
+                                <img
+                                    src="assets/perfil.webp"
+                                    alt="Franco Nuzzo — Developer"
+                                    class="profile-photo"
+                                    draggable="false"
+                                />
+                                <div class="profile-hud-label">
+                                    <span class="profile-status-dot"></span>
+                                    <span>OPERATIVE // NUZZO.F</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="spec-item">
-                            <span class="spec-label">DATABASE</span>
-                            <span class="spec-value">PostgreSQL / SQLite</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">SPECIALIZATION</span>
-                            <span class="spec-value">Software Engineering</span>
-                        </div>
+
                     </div>
                 </div>
 
@@ -226,24 +255,62 @@
                 <div class="projects-grid">
                 
                     <article class="project-card">
-                        <div class="project-badge">SYS_01</div>
-                        <h3 class="project-title">PROYECTO ALPHA</h3>
-                        <p class="project-desc">Descripción táctica del proyecto, arquitectura utilizada e impacto del trabajo realizado.</p>
-                        <div class="project-tech">
-                            <span>GSAP</span>
-                            <span>THREE.JS</span>
-                            <span>CSS3</span>
+                        <div class="project-img-container">
+                            <img src="assets/sims.png" alt="S.I.M.S Project" class="project-img">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-badge">SYS_01</div>
+                            <h3 class="project-title">S.I.M.S</h3>
+                            <p class="project-desc">Sistema Integrado de Múltiples Servicios. Plataforma para gestión y administración de servicios.</p>
+                            <div class="project-tech">
+                                <span>REACT</span>
+                                <span>NODE.JS</span>
+                                <span>MONGODB</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/Uni-Space-Projects/S.I.M.S.git" target="_blank" class="btn-github">[ VIEW_CODE // GITHUB ]</a>
+                            </div>
                         </div>
                     </article>
 
                     <article class="project-card">
-                        <div class="project-badge">SYS_02</div>
-                        <h3 class="project-title">PROYECTO BETA</h3>
-                        <p class="project-desc">Plataforma interactiva con renderizado dinámico y microinteracciones HUD.</p>
-                        <div class="project-tech">
-                            <span>REACT</span>
-                            <span>WEBGL</span>
-                            <span>TAILWIND</span>
+                        <div class="project-img-container">
+                            <img src="assets/skydash.png" alt="SkyDash Project" class="project-img">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-badge">SYS_02</div>
+                            <h3 class="project-title">SkyDash</h3>
+                            <p class="project-desc">Dashboard interactivo con renderizado dinámico, gráficos y métricas en tiempo real.</p>
+                            <div class="project-tech">
+                                <span>REACT</span>
+                                <span>TAILWIND</span>
+                                <span>CHART.JS</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/francoN753/SkyDash-Frontend.git" target="_blank" class="btn-github">[ VIEW_CODE // GITHUB ]</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-img-container">
+                            <img src="assets/deezer.png" alt="Deezer Project" class="project-img">
+                            <div class="project-img-overlay"></div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-badge">SYS_03</div>
+                            <h3 class="project-title">Deezer Clone</h3>
+                            <p class="project-desc">Clon de la plataforma de streaming de música Deezer con reproducción de audio y listas.</p>
+                            <div class="project-tech">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JAVASCRIPT</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/francoN753/Deezer.git" target="_blank" class="btn-github">[ VIEW_CODE // GITHUB ]</a>
+                            </div>
                         </div>
                     </article>
 

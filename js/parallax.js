@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardBio = document.querySelector(".card-bio");
     const specItems = document.querySelectorAll(".spec-item");
     const cardFooter = document.querySelector(".card-footer");
+    const profileFrame = document.querySelector(".profile-frame");
 
     // Estado inicial de la tarjeta "Sobre Mí"
     if (tacticalCard) {
@@ -102,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cardBio) gsap.set(cardBio, { opacity: 0, y: 12 });
     if (specItems.length) gsap.set(specItems, { opacity: 0, y: 15 });
     if (cardFooter) gsap.set(cardFooter, { opacity: 0, y: 8 });
+    if (profileFrame) gsap.set(profileFrame, { opacity: 0, x: 20, scale: 0.95 });
+
 
     // Timeline Principal Hero -> Sobre Mí
     const breachTl = gsap.timeline({
@@ -173,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cardSubLabel) breachTl.to(cardSubLabel, { opacity: 1, x: 0, duration: 0.15 }, 0.55);
     if (cardMainTitle) breachTl.to(cardMainTitle, { opacity: 1, y: 0, duration: 0.2 }, 0.58);
     if (cardBio) breachTl.to(cardBio, { opacity: 1, y: 0, duration: 0.2 }, 0.62);
+    if (profileFrame) breachTl.to(profileFrame, { opacity: 1, x: 0, scale: 1, duration: 0.3, ease: "power2.out" }, 0.60);
     if (specItems.length) {
         breachTl.to(specItems, {
             opacity: 1,
