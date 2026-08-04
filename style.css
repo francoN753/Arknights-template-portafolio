@@ -2089,3 +2089,27 @@ body.no-scroll {
 #hud-shutters {
   display: none !important;
 }
+
+/* ==========================================
+   BADGE DE DISPONIBILIDAD (HERO)
+   ========================================== */
+.hero-availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading, monospace);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-light, #F4F5F5);
+  background: rgba(101, 113, 54, 0.15);
+  border: 1px solid rgba(101, 113, 54, 0.4);
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.hero-availability-badge .status-text {
+  font-weight: 600;
+  color: #a3e635; /* Verde neón táctico */
+}
